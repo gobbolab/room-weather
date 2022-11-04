@@ -24,6 +24,7 @@ class RoomWeather
     RW_HTU31D * _htu31d;
     String _location;
     void Connect(char ssid[], char password[]);
+    String BuildMetrics();
     String GetTemperatureMetrics();
     String GetLocationLabel();
     String ToProm(String value, String name, String label);

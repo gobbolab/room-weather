@@ -65,16 +65,11 @@ void RoomWeather::Serve() {
         Serial.write(c);
 
         if (c == '\n' && currentLineIsBlank) {
-            String metrics = GetTemperatureMetrics();
-
             client.println("HTTP/1.1 200 OK");
             client.println("Content-Type: text/plain");
             client.println("Connection: close");
             client.println();
-        //   client.println("<!DOCTYPE HTML>");
-        //   client.println("<html>");
-            client.print(metrics);
-        //   client.println("</html>");
+            client.print(BuildMetrics());
             break;
         }
         
@@ -107,13 +102,21 @@ void RoomWeather::PrintWifiStatus() {
   Serial.println(" dBm");
 }
 
+String RoomWeather::BuildMetrics() {
+    String metrics = "";
+
+    metrics += GetTemperatureMetrics();
+
+    return metrics;
+}
+
 String RoomWeather::GetTemperatureMetrics() {
     String name = "rw_temperature";
     String fLabel = GetLocationLabel() + ", " + "unit=\"fahrenheit\"";
     String cLabel = GetLocationLabel() + ", " + "unit=\"celcius\"";
 
     String metrics = ToProm(GetHtu31dTempFahrenheit(), name, fLabel);
-    metrics += "\n" + ToProm(GetHtu31dTempCelcius(), name, cLabel);
+    metrics += "\n" + ToProm(GetHtu31dTempCelcius(), name, cLabel) + "\n";
     return metrics;
 }
 
