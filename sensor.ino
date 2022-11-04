@@ -1,7 +1,8 @@
 #include "RoomWeather.h"
+#include "RoomWeatherSecrets.h"
 
-char ssid[] = "TeamshipHQ";
-char pass[] = "partoftheship720";
+char ssid[] = SECRET_SSID;
+char pass[] = SECRET_PASS;
 
 RoomWeather *rw;
 
@@ -12,7 +13,7 @@ void setup() {
     ; 
   }
 
-  rw = new RoomWeather(ssid, pass);
+  rw = new RoomWeather("workshop", ssid, pass);
   rw->Detect();
 }
 

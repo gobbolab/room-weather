@@ -8,8 +8,8 @@
 class RoomWeather
 {
   public:
-    RoomWeather();
-    RoomWeather(char ssid[], char password[]);
+    RoomWeather(String location);
+    RoomWeather(String location, char ssid[], char password[]);
     void Detect();
     void Scan();
     String GetMockSensorValue();
@@ -22,9 +22,11 @@ class RoomWeather
     WiFiServer *_server;
     MockSensor *_mockSensor;
     RW_HTU31D * _htu31d;
+    String _location;
     void Connect(char ssid[], char password[]);
+    String GetTemperatureMetrics();
+    String GetLocationLabel();
     String ToProm(String value, String name, String label);
-
 };
 
 #endif

@@ -1,10 +1,12 @@
 #include "RoomWeather.h"
 #include "Arduino.h"
 
-RoomWeather::RoomWeather() {
+RoomWeather::RoomWeather(String location) {
+    _location = location;
 }
 
-RoomWeather::RoomWeather(char ssid[], char password[]) {
+RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
+    _location = location;
     Connect(ssid, password);
 }
 
@@ -63,8 +65,7 @@ void RoomWeather::Serve() {
         Serial.write(c);
 
         if (c == '\n' && currentLineIsBlank) {
-            String metric = ToProm(GetHtu31dTempFahrenheit(), "rw_temperature", "location=\"workshop\", unit=\"fahrenheit\"");
-            metric += "\n" + ToProm(GetHtu31dTempCelcius(), "rw_temperature", "location=\"workshop\", unit=\"celcius\"");
+            String metrics = GetTemperatureMetrics();
 
             client.println("HTTP/1.1 200 OK");
             client.println("Content-Type: text/plain");
@@ -72,9 +73,9 @@ void RoomWeather::Serve() {
             client.println();
         //   client.println("<!DOCTYPE HTML>");
         //   client.println("<html>");
-          client.print(metric);
+            client.print(metrics);
         //   client.println("</html>");
-          break;
+            break;
         }
         
         if (c == '\n') {
@@ -104,6 +105,20 @@ void RoomWeather::PrintWifiStatus() {
   Serial.print("signal strength (RSSI):");
   Serial.print(rssi);
   Serial.println(" dBm");
+}
+
+String RoomWeather::GetTemperatureMetrics() {
+    String name = "rw_temperature";
+    String fLabel = GetLocationLabel() + ", " + "unit=\"fahrenheit\"";
+    String cLabel = GetLocationLabel() + ", " + "unit=\"celcius\"";
+
+    String metrics = ToProm(GetHtu31dTempFahrenheit(), name, fLabel);
+    metrics += "\n" + ToProm(GetHtu31dTempCelcius(), name, cLabel);
+    return metrics;
+}
+
+String RoomWeather::GetLocationLabel() {
+    return "location=\"" + _location + "\"";
 }
 
 String RoomWeather::ToProm(String value, String name, String label) {
