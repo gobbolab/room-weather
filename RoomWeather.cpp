@@ -63,12 +63,13 @@ void RoomWeather::Serve() {
         Serial.write(c);
 
         if (c == '\n' && currentLineIsBlank) {
-          String metric = ToProm(GetHtu31dTempFahrenheit(), "rw_temperature", "location=\"workshop\"");
+            String metric = ToProm(GetHtu31dTempFahrenheit(), "rw_temperature", "location=\"workshop\", unit=\"fahrenheit\"");
+            metric += "\n" + ToProm(GetHtu31dTempCelcius(), "rw_temperature", "location=\"workshop\", unit=\"celcius\"");
 
-          client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: text/plain");
-          client.println("Connection: close");
-          client.println();
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-Type: text/plain");
+            client.println("Connection: close");
+            client.println();
         //   client.println("<!DOCTYPE HTML>");
         //   client.println("<html>");
           client.print(metric);
