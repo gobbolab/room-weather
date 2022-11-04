@@ -62,7 +62,7 @@ void loop() {
 
 # Config
 
-To run the included sensor.ino sketch, you must create a file called `RoomWeatherConfig.h` in your include path.
+To run the included `sensor.ino` sketch, you must create a file called `RoomWeatherConfig.h` in your include path.
 
 The file should define the following:
 
