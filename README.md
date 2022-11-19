@@ -8,31 +8,42 @@ The hope is to provide a simple system for monitoring air quality in houses, wor
 
 # Usage
 
+See example `sensor.ino` sketch for a full usage example.
+
+## Creating a Room Weather Instance
+
+In it's simplest form a Room Weather instance can be created simply by specifying a location.
+
 ```
-RoomWeather *rw;
+RoomWeather *rw = new RoomWeather("office");
+```
 
-void setup() {
-  // Start serial
-  Serial.begin(115200);
+Alternatively, Room Weather can connect to WiFi which gives it the ability to export sensor data as Prometheus metrics.
 
-  while (!Serial) {
-    ; 
-  }
+```
+char[] ssid = "your_ssid";
+char[] password = "your_password";
+RoomWeather *rw = new RoomWeather("office", ssid, password);
+```
 
-  // Create a new room weather object
-  rw = new RoomWeather("office");
+You can also specify a specific IP address.
 
-  // Call detect to identify available sensors
-  rw->Detect();
-}
+```
+char[] ssid = "your_ssid";
+char[] password = "your_password";
+String ip = "192.168.86.106";
+String netmask = "255.255.255.0";
+String gateway = "192.168.86.1";
+RoomWeather *rw = new RoomWeather("office", ssid, password, ip, netmask, gateway);
+```
 
-void loop() {
-  // Call scan to read values of all available sensors
-  rw->Scan();
+# Detecting Sensors
 
-  // Print sensor data
-  Serial.println(rw->GetHtu31dTempCelcius());
-}
+Calling `Detect` will trigger Room Weather to automatically detect any supported sensors connected on I2C.
+
+```
+RoomWeather *rw = new RoomWeather("office", "wifi_ssid", "wifipassword");
+rw->Detect();
 ```
 
 # Prometheus Export
@@ -43,7 +54,7 @@ Sensor data can automatically be exposed in Prometheus metric format on boards t
 RoomWeather *rw;
 
 void setup() {
-  rw = new RoomWeather("office", "officewifi", "wifipassword");
+  rw = new RoomWeather("office", "wifi_ssid", "wifipassword");
   rw->Detect();
 }
 
@@ -60,7 +71,13 @@ void loop() {
 
 [HTU31D Temp & Humidity](https://www.adafruit.com/product/4832)
 
-# Config
+```
+String celcius = rw->GetHtu31dTempCelcius();
+String fahrenheit = rw->GetHtu31dTempFahrenheit();
+String humidity = rw->GetHtu31dHumidity();
+```
+
+# Configuring Sample Sketch
 
 To run the included `sensor.ino` sketch, you must create a file called `RoomWeatherConfig.h` in your include path.
 
@@ -70,4 +87,6 @@ The file should define the following:
 #define RW_SECRET_SSID "your_wifi_ssid"
 #define RW_SECRET_PASS "your_wifi_password"
 #define RW_LOCATION "location_or_name_of_room_weather_instance"
+#define RW_SUBMASK "your_subnet_mask"
+#define RW_GATEWAY "your_default_gateway"
 ```

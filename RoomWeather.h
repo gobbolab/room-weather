@@ -10,6 +10,7 @@ class RoomWeather
   public:
     RoomWeather(String location);
     RoomWeather(String location, char ssid[], char password[]);
+    RoomWeather(String location, char ssid[], char password[], String ip, String submask, String gateway);
     void Detect();
     void Scan();
     String GetMockSensorValue();
@@ -24,6 +25,8 @@ class RoomWeather
     RW_HTU31D * _htu31d;
     String _location;
     void Connect(char ssid[], char password[]);
+    void Connect(char ssid[], char password[], String ipStr, String submaskStr, String gatewayStr);
+    void StartWiFi(char ssid[], char password[]);
     String BuildMetrics();
     String GetTemperatureMetrics();
     String GetLocationLabel();

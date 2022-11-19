@@ -13,7 +13,7 @@ void setup() {
     ; 
   }
 
-  rw = new RoomWeather(RW_LOCATION, ssid, pass);
+  rw = new RoomWeather(RW_LOCATION, ssid, pass, RW_IP, RW_SUBMASK, RW_GATEWAY);
   rw->Detect();
 }
 

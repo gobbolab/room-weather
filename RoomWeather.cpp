@@ -10,6 +10,11 @@ RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
     Connect(ssid, password);
 }
 
+RoomWeather::RoomWeather(String location, char ssid[], char password[], String ip, String submask, String gateway) {
+    _location = location;
+    Connect(ssid, password, ip, submask, gateway);
+}
+
 void RoomWeather::Detect() {
     _mockSensor = new MockSensor(1);
     _htu31d = new RW_HTU31D();
@@ -37,16 +42,40 @@ String RoomWeather::GetHtu31dHumidity() {
 }
 
 void RoomWeather::Connect(char ssid[], char password[]) {
+    StartWiFi(ssid, password);
+}
+
+void RoomWeather::Connect(char ssid[], char password[], String ipStr, String submaskStr, String gatewayStr) {
+    IPAddress ip;
+    IPAddress submask;
+    IPAddress gateway;
+    IPAddress primaryDNS;
+    IPAddress secondaryDNS;
+
+    if (ip.fromString(ipStr) && submask.fromString(submaskStr) && gateway.fromString(gatewayStr)) {
+        WiFi.config(ip, submask, gateway);
+        Serial.println("Using specified network configuration.");
+        Serial.println("IP Address: " + ipStr);
+        Serial.println("Subnetmask: " + submaskStr);
+        Serial.println("Gateway: " + gatewayStr);
+    } else {
+        Serial.println("Failed to parse network configuration, defaulting to DHCP.");
+    }
+    
+    StartWiFi(ssid, password);
+}
+
+void RoomWeather::StartWiFi(char ssid[], char password[]) {
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
         Serial.print(".");  
     }
 
-  _server = new WiFiServer(80);
-  _server->begin();
+    _server = new WiFiServer(80);
+    _server->begin();
 
-  PrintWifiStatus();
+    PrintWifiStatus();
 }
 
 void RoomWeather::Serve() {
