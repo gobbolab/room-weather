@@ -16,17 +16,11 @@ RoomWeather::RoomWeather(String location, char ssid[], char password[], String i
 }
 
 void RoomWeather::Detect() {
-    _mockSensor = new MockSensor(1);
     _htu31d = new RW_HTU31D();
 }
 
 void RoomWeather::Scan() {
-    _mockSensor->Read();
     _htu31d->Read();
-}
-
-String RoomWeather::GetMockSensorValue() {
-    return _mockSensor->GetValue();
 }
 
 String RoomWeather::GetHtu31dTempCelcius() {

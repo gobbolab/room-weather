@@ -37,7 +37,7 @@ String gateway = "192.168.86.1";
 RoomWeather *rw = new RoomWeather("office", ssid, password, ip, netmask, gateway);
 ```
 
-# Detecting Sensors
+## Detecting Sensors
 
 Calling `Detect` will trigger Room Weather to automatically detect any supported sensors connected on I2C.
 
@@ -46,7 +46,14 @@ RoomWeather *rw = new RoomWeather("office", "wifi_ssid", "wifipassword");
 rw->Detect();
 ```
 
-# Prometheus Export
+## Reading Sensor Values
+Calling `Scan` will trigger Room Weather to read the values of all detected sensors.
+
+```
+rw->Scan();
+```
+
+## Prometheus Export
 
 Sensor data can automatically be exposed in Prometheus metric format on boards that have WiFi enabled.
 
