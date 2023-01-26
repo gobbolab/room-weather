@@ -3,18 +3,18 @@
 
 #include "Sensor.h"
 #include <Wire.h>
-#include "Adafruit_SGP30.h"
+#include "Adafruit_HTU31D.h"
 
-class RW_SGP30 : public Sensor
+class RW_HTU31D : public Sensor
 {
   public:
-    RW_SGP30();
+    RW_HTU31D();
     void Read();
     String GetTempStringCelcius();
     String GetTempStringFahrenheit();
     String GetHumidityString();
   private:
-    Adafruit_SGP30 sgp;
+    Adafruit_HTU31D htu;
     float _temp;
     float _humidity;
 };

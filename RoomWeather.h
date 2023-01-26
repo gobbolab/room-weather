@@ -19,7 +19,7 @@ class RoomWeather
     void Serve();
   private:
     WiFiServer *_server;
-    RW_SGP30 * _htu31d;
+    RW_HTU31D * _htu31d;
     String _location;
     void Connect(char ssid[], char password[]);
     void Connect(char ssid[], char password[], String ipStr, String submaskStr, String gatewayStr);

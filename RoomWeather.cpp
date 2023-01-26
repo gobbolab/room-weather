@@ -16,7 +16,7 @@ RoomWeather::RoomWeather(String location, char ssid[], char password[], String i
 }
 
 void RoomWeather::Detect() {
-    _htu31d = new RW_SGP30();
+    _htu31d = new RW_HTU31D();
 }
 
 void RoomWeather::Scan() {
