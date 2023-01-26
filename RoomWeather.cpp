@@ -16,13 +16,11 @@ RoomWeather::RoomWeather(String location, char ssid[], char password[], String i
 }
 
 void RoomWeather::Detect() {
-    _htu31d = new RW_HTU31d();
-    _sgp30 = new RW_SGP30();
+    _htu31d = new RW_SGP30();
 }
 
 void RoomWeather::Scan() {
     _htu31d->Read();
-    _sgp30->Read();;
 }
 
 String RoomWeather::GetHtu31dTempCelcius() {
@@ -36,27 +34,6 @@ String RoomWeather::GetHtu31dTempFahrenheit() {
 String RoomWeather::GetHtu31dHumidity() {
     return _htu31d->GetHumidityString();
 }
-
-String RoomWeather::GetSGP30eCO2() {
-    return _sgp30->GetCO2stringPPM();
-}
-
-String RoomWeather::GetSGP30VOC() {
-    return _sgp30->GetVOCstringPPB();
-}
-
-
-// String RoomWeather::GetSGP30H2() {
-//     return _sgp30->GetH2string();
-// }
-
-// String RoomWeather::GetSGP30Ethanol() {
-//     return _sgp30->GetETHANOLstring();
-// }
-
-// String RoomWeather::GetSGP30AbsoluteHumidity() {
-//     return _sgp30->getAbsoluteHumidity((float)_hu31d_Celcius, (float)_htu31d_humidity);
-// }
 
 void RoomWeather::Connect(char ssid[], char password[]) {
     StartWiFi(ssid, password);
@@ -152,7 +129,6 @@ String RoomWeather::BuildMetrics() {
     String metrics = "";
 
     metrics += GetTemperatureMetrics();
-    metrics += GetQualityMetrics();
 
     return metrics;
 }
@@ -164,22 +140,6 @@ String RoomWeather::GetTemperatureMetrics() {
 
     String metrics = ToProm(GetHtu31dTempFahrenheit(), name, fLabel);
     metrics += "\n" + ToProm(GetHtu31dTempCelcius(), name, cLabel) + "\n";
-    return metrics;
-}
-
-String RoomWeather::GetQualityMetrics() {
-    String name = "rw_airQuality";
-    String vocLabel = GetLocationLabel() + ", " + "unit=\"ppb\""; 
-    String co2Label = GetLocationLabel() + ", " + "unit=\"ppm\"";
-    // String h2Label
-    // String ethanolLabel
-    // String absHumidityLabel
-
-    String metrics = ToProm(GetSGP30VOC(), name, vocLabel);
-    metrics += "\n" + ToProm(GetSGP30eCO2(), name, co2Label) + "\n";
-    // metrics += "\n" + ToProm(GetSGP30H2(), name, h2Label) + "\n";
-    // metrics += "\n" + ToProm(GetSGP30Ethanol(), name, ethanolLabel) + "\n";
-    // metrics += "\n" + ToProm(GetSGP30AbsoluteHumidity(), name, absHumidityLabel) + "\n";
     return metrics;
 }
 
