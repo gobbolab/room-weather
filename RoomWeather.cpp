@@ -45,6 +45,19 @@ String RoomWeather::GetSGP30VOC() {
     return _sgp30->GetVOCstringPPB();
 }
 
+
+// String RoomWeather::GetSGP30H2() {
+//     return _sgp30->GetH2string();
+// }
+
+// String RoomWeather::GetSGP30Ethanol() {
+//     return _sgp30->GetETHANOLstring();
+// }
+
+// String RoomWeather::GetSGP30AbsoluteHumidity() {
+//     return _sgp30->getAbsoluteHumidity((float)_hu31d_Celcius, (float)_htu31d_humidity);
+// }
+
 void RoomWeather::Connect(char ssid[], char password[]) {
     StartWiFi(ssid, password);
 }
@@ -139,7 +152,7 @@ String RoomWeather::BuildMetrics() {
     String metrics = "";
 
     metrics += GetTemperatureMetrics();
-    metrics += GetSGP30Metrics();
+    metrics += GetQualityMetrics();
 
     return metrics;
 }
@@ -154,13 +167,19 @@ String RoomWeather::GetTemperatureMetrics() {
     return metrics;
 }
 
-String RoomWeather::GetSGP30Metrics() {
-    String name = "rw_sgp30";
+String RoomWeather::GetQualityMetrics() {
+    String name = "rw_airQuality";
     String vocLabel = GetLocationLabel() + ", " + "unit=\"ppb\""; 
     String co2Label = GetLocationLabel() + ", " + "unit=\"ppm\"";
+    // String h2Label
+    // String ethanolLabel
+    // String absHumidityLabel
 
     String metrics = ToProm(GetSGP30VOC(), name, vocLabel);
     metrics += "\n" + ToProm(GetSGP30eCO2(), name, co2Label) + "\n";
+    // metrics += "\n" + ToProm(GetSGP30H2(), name, h2Label) + "\n";
+    // metrics += "\n" + ToProm(GetSGP30Ethanol(), name, ethanolLabel) + "\n";
+    // metrics += "\n" + ToProm(GetSGP30AbsoluteHumidity(), name, absHumidityLabel) + "\n";
     return metrics;
 }
 
