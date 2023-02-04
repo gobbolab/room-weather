@@ -83,6 +83,13 @@ String celcius = rw->GetHtu31dTempCelcius();
 String fahrenheit = rw->GetHtu31dTempFahrenheit();
 String humidity = rw->GetHtu31dHumidity();
 ```
+[SGP30 VOC & C02](https://www.adafruit.com/product/3709)
+
+...
+
+String voc = rw->GetSGP30VOC();
+String ec02 = rw->GetSGP30eCO2();
+...
 
 # Configuring Sample Sketch
 

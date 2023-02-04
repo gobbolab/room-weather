@@ -18,9 +18,6 @@ class RoomWeather
     String GetHtu31dHumidity();
     String GetSGP30eCO2();
     String GetSGP30VOC();
-    // String GetSGP30H2();
-    // String GetSGP30Ethanol();
-    // String GetSGP30AbsoluteHumidity();
     void PrintWifiStatus();
     void Serve();
   private:
@@ -33,7 +30,7 @@ class RoomWeather
     void StartWiFi(char ssid[], char password[]);
     String BuildMetrics();
     String GetTemperatureMetrics();
-    String GetQualityMetrics();
+    String GetVOCMetrics();
     String GetLocationLabel();
     String ToProm(String value, String name, String label);
 };
