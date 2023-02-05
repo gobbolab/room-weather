@@ -25,7 +25,7 @@ void RoomWeather::Detect() {
     _sgp30 = new RW_SGP30();
 }
 
-void RoomWeather::Scan() {
+void RoomWeather::Read() {
     _htu31d->Read();
     _sgp30->Read();;
 }

@@ -12,7 +12,7 @@ class RoomWeather
     RoomWeather(String location);
     RoomWeather(String location, char ssid[], char password[]);
     void Detect();
-    void Scan();
+    void Read();
     String GetHtu31dTempCelsius();
     String GetHtu31dTempFahrenheit();
     String GetHtu31dHumidity();
