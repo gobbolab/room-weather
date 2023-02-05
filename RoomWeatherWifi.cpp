@@ -5,13 +5,15 @@ RoomWeatherWifi::RoomWeatherWifi(char ssid[], char password[]) {
 }
 
 void RoomWeatherWifi::StartWiFi(char ssid[], char password[]) {
-    Serial.print("Attempting to connect to wifi");
+    Serial.print("Attempting to connect to wifi..");
 
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
         Serial.print(".");  
     }
+
+    Serial.println("");
 
     _server = new WiFiServer(80);
     _server->begin();
@@ -59,7 +61,7 @@ void RoomWeatherWifi::Serve(String metrics) {
 }
 
 void RoomWeatherWifi::PrintWifiStatus() {
-  Serial.print("===== WiFi Status =====");
+  Serial.println("===== WiFi Status =====");
 
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());

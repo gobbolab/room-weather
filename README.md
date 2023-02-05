@@ -26,17 +26,6 @@ char[] password = "your_password";
 RoomWeather *rw = new RoomWeather("office", ssid, password);
 ```
 
-You can also specify a specific IP address.
-
-```
-char[] ssid = "your_ssid";
-char[] password = "your_password";
-String ip = "192.168.86.106";
-String netmask = "255.255.255.0";
-String gateway = "192.168.86.1";
-RoomWeather *rw = new RoomWeather("office", ssid, password, ip, netmask, gateway);
-```
-
 ## Detecting Sensors
 
 Calling `Detect` will trigger Room Weather to automatically detect any supported sensors connected on I2C.
