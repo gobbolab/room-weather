@@ -22,7 +22,7 @@ void RW_HTU31D::Read(){
     _temp = t.temperature;
 }
 
-String RW_HTU31D::GetTempStringCelcius() {
+String RW_HTU31D::GetTempStringCelsius() {
     if(!_sensorFound) {
         return "unavailable";
     }
