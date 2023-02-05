@@ -79,7 +79,7 @@ void loop() {
 [HTU31D Temp & Humidity](https://www.adafruit.com/product/4832)
 
 ```
-String celcius = rw->GetHtu31dTempCelcius();
+String celsius = rw->GetHtu31dTempCelsius();
 String fahrenheit = rw->GetHtu31dTempFahrenheit();
 String humidity = rw->GetHtu31dHumidity();
 ```

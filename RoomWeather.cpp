@@ -6,7 +6,7 @@
 #define METRIC_VOC "metric=\"voc\""
 #define METRIC_CO2 "metric=\"co2\""
 #define UNIT_FAHRENHEIT "unit=\"fahrenheit\""
-#define UNIT_CELSIUS "unit=\"celcius\""
+#define UNIT_CELSIUS "unit=\"celsius\""
 #define UNIT_PPM "unit=\"ppm\""
 #define UNIT_PPB "unit=\"ppb\""
 
@@ -34,8 +34,8 @@ void RoomWeather::Scan() {
     _sgp30->Read();;
 }
 
-String RoomWeather::GetHtu31dTempCelcius() {
-    return _htu31d->GetTempStringCelcius();
+String RoomWeather::GetHtu31dTempCelsius() {
+    return _htu31d->GetTempStringCelsius();
 }
 
 String RoomWeather::GetHtu31dTempFahrenheit() {
@@ -161,7 +161,7 @@ String RoomWeather::GetHTU31DMetrics() {
     String name = "rw_htu31d";
 
     String metrics = ToProm(name, GetHtu31dTempFahrenheit(), METRIC_TEMP, UNIT_FAHRENHEIT);
-    metrics += "\n" + ToProm(name, GetHtu31dTempCelcius(), METRIC_TEMP, UNIT_CELSIUS) + "\n";
+    metrics += "\n" + ToProm(name, GetHtu31dTempCelsius(), METRIC_TEMP, UNIT_CELSIUS) + "\n";
     return metrics;
 }
 

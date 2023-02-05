@@ -10,7 +10,7 @@ class RW_HTU31D : public Sensor
   public:
     RW_HTU31D();
     void Read();
-    String GetTempStringCelcius();
+    String GetTempStringCelsius();
     String GetTempStringFahrenheit();
     String GetHumidityString();
   private:
