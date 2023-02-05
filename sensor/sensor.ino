@@ -13,11 +13,15 @@ void setup() {
     ; 
   }
 
-  rw = new RoomWeather(RW_LOCATION, ssid, pass, RW_IP, RW_SUBMASK, RW_GATEWAY);
+  Serial.println("Serial started.");
+
+  rw = new RoomWeather(RW_LOCATION, ssid, pass);
   rw->Detect();
 }
 
 void loop() {
   rw->Scan();
+  // Serial.print("VOC: ");
+  // Serial.println(rw->GetSGP30VOC());
   rw->Serve();
 }

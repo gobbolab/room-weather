@@ -122,6 +122,8 @@ void RoomWeather::Serve() {
 }
 
 void RoomWeather::PrintWifiStatus() {
+  Serial.print("===== WiFi Status =====");
+
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
 
@@ -133,6 +135,8 @@ void RoomWeather::PrintWifiStatus() {
   Serial.print("signal strength (RSSI):");
   Serial.print(rssi);
   Serial.println(" dBm");
+
+  Serial.println("---------------");
 }
 
 String RoomWeather::BuildMetrics() {
