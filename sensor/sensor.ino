@@ -21,5 +21,5 @@ void setup() {
 
 void loop() {
   rw->Scan();
-  rw->Serve();
+  rw->ServeMetrics();
 }

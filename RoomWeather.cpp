@@ -17,12 +17,7 @@ RoomWeather::RoomWeather(String location) {
 
 RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
     _location = location;
-    Connect(ssid, password);
-}
-
-RoomWeather::RoomWeather(String location, char ssid[], char password[], String ip, String submask, String gateway) {
-    _location = location;
-    Connect(ssid, password, ip, submask, gateway);
+    _wifi = new RoomWeatherWifi(ssid, password);
 }
 
 void RoomWeather::Detect() {
@@ -53,100 +48,6 @@ String RoomWeather::GetSGP30eCO2() {
 
 String RoomWeather::GetSGP30VOC() {
     return _sgp30->GetVOCStringPPB();
-}
-
-void RoomWeather::Connect(char ssid[], char password[]) {
-    StartWiFi(ssid, password);
-}
-
-void RoomWeather::Connect(char ssid[], char password[], String ipStr, String submaskStr, String gatewayStr) {
-    IPAddress ip;
-    IPAddress submask;
-    IPAddress gateway;
-    IPAddress primaryDNS;
-    IPAddress secondaryDNS;
-
-    if (ip.fromString(ipStr) && submask.fromString(submaskStr) && gateway.fromString(gatewayStr)) {
-        WiFi.config(ip, submask, gateway);
-        Serial.println("Using specified network configuration.");
-        Serial.println("IP Address: " + ipStr);
-        Serial.println("Subnetmask: " + submaskStr);
-        Serial.println("Gateway: " + gatewayStr);
-    } else {
-        Serial.println("Failed to parse network configuration, defaulting to DHCP.");
-    }
-    
-    StartWiFi(ssid, password);
-}
-
-void RoomWeather::StartWiFi(char ssid[], char password[]) {
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");  
-    }
-
-    _server = new WiFiServer(80);
-    _server->begin();
-
-    PrintWifiStatus();
-}
-
-void RoomWeather::Serve() {
-    WiFiClient client = _server->available();
-
-  if (client) {
-    Serial.println("new client");
-
-    bool currentLineIsBlank = true;
-
-    while (client.connected()) {
-      if (client.available()) {
-
-        char c = client.read();
-
-        Serial.write(c);
-
-        if (c == '\n' && currentLineIsBlank) {
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-Type: text/plain");
-            client.println("Connection: close");
-            client.println();
-            client.print(BuildMetrics());
-            break;
-        }
-        
-        if (c == '\n') {
-          currentLineIsBlank = true;
-        } else if (c != '\r') {
-
-          currentLineIsBlank = false;
-        }
-      }
-    }
-
-    delay(1);
-    client.stop();
-    Serial.println("client disconnected");
-  }
-}
-
-void RoomWeather::PrintWifiStatus() {
-  Serial.print("===== WiFi Status =====");
-
-  Serial.print("SSID: ");
-  Serial.println(WiFi.SSID());
-
-  IPAddress ip = WiFi.localIP();
-  Serial.print("IP Address: ");
-  Serial.println(ip);
-
-  long rssi = WiFi.RSSI();
-  Serial.println("signal strength (RSSI):");
-  Serial.print(rssi);
-  Serial.println(" dBm");
-
-  Serial.println("---------------");
 }
 
 String RoomWeather::BuildMetrics() {
@@ -182,4 +83,13 @@ String RoomWeather::GetLocationLabel() {
 String RoomWeather::ToProm(String name, String value, String metric, String unit) {
     String label = GetLocationLabel() + ", " + metric + ", " + unit;
     return name + "{" + label + "} " + value;
+}
+
+void RoomWeather::ServeMetrics() {
+    if(!_wifi) {
+        Serial.println("Attempted to serve metrics over wifi, but wifi is not connected.");
+        return;
+    }
+
+    _wifi->Serve(BuildMetrics());
 }
