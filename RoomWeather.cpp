@@ -7,6 +7,7 @@
 #define METRIC_CO2 "metric=\"co2\""
 #define UNIT_FAHRENHEIT "unit=\"fahrenheit\""
 #define UNIT_CELSIUS "unit=\"celsius\""
+#define UNIT_HUMIDITY "unit=\"percent\""
 #define UNIT_PPM "unit=\"ppm\""
 #define UNIT_PPB "unit=\"ppb\""
 
@@ -161,7 +162,8 @@ String RoomWeather::GetHTU31DMetrics() {
     String name = "rw_htu31d";
 
     String metrics = ToProm(name, GetHtu31dTempFahrenheit(), METRIC_TEMP, UNIT_FAHRENHEIT);
-    metrics += "\n" + ToProm(name, GetHtu31dTempCelsius(), METRIC_TEMP, UNIT_CELSIUS) + "\n";
+    metrics += "\n" + ToProm(name, GetHtu31dTempCelsius(), METRIC_TEMP, UNIT_CELSIUS) + "\n"
+    + ToProm(name, GetHtu31dHumidity(), METRIC_HUMIDITY, UNIT_HUMIDITY) + "\n";
     return metrics;
 }
 
