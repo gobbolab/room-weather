@@ -29,10 +29,10 @@ class RoomWeather
     void Connect(char ssid[], char password[], String ipStr, String submaskStr, String gatewayStr);
     void StartWiFi(char ssid[], char password[]);
     String BuildMetrics();
-    String GetTemperatureMetrics();
-    String GetVOCMetrics();
+    String GetHTU31DMetrics();
+    String GetSGP30Metrics();
     String GetLocationLabel();
-    String ToProm(String value, String name, String label);
+    String ToProm(String name, String value, String metric, String unit);
 };
 
 #endif
