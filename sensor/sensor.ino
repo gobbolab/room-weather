@@ -21,7 +21,5 @@ void setup() {
 
 void loop() {
   rw->Scan();
-  // Serial.print("VOC: ");
-  // Serial.println(rw->GetSGP30VOC());
   rw->Serve();
 }

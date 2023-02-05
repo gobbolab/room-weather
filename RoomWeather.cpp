@@ -1,6 +1,15 @@
 #include "RoomWeather.h"
 #include "Arduino.h"
 
+#define METRIC_TEMP "metric=\"temperature\""
+#define METRIC_HUMIDITY "metric=\"humidity\""
+#define METRIC_VOC "metric=\"voc\""
+#define METRIC_CO2 "metric=\"co2\""
+#define UNIT_FAHRENHEIT "unit=\"fahrenheit\""
+#define UNIT_CELSIUS "unit=\"celcius\""
+#define UNIT_PPM "unit=\"ppm\""
+#define UNIT_PPB "unit=\"ppb\""
+
 RoomWeather::RoomWeather(String location) {
     _location = location;
 }
@@ -132,7 +141,7 @@ void RoomWeather::PrintWifiStatus() {
   Serial.println(ip);
 
   long rssi = WiFi.RSSI();
-  Serial.print("signal strength (RSSI):");
+  Serial.println("signal strength (RSSI):");
   Serial.print(rssi);
   Serial.println(" dBm");
 
@@ -142,29 +151,25 @@ void RoomWeather::PrintWifiStatus() {
 String RoomWeather::BuildMetrics() {
     String metrics = "";
 
-    metrics += GetTemperatureMetrics();
-    metrics += GetVOCMetrics();
+    metrics += GetHTU31DMetrics();
+    metrics += GetSGP30Metrics();
 
     return metrics;
 }
 
-String RoomWeather::GetTemperatureMetrics() {
-    String name = "rw_temperature";
-    String fLabel = GetLocationLabel() + ", " + "unit=\"fahrenheit\"";
-    String cLabel = GetLocationLabel() + ", " + "unit=\"celcius\"";
+String RoomWeather::GetHTU31DMetrics() {
+    String name = "rw_htu31d";
 
-    String metrics = ToProm(GetHtu31dTempFahrenheit(), name, fLabel);
-    metrics += "\n" + ToProm(GetHtu31dTempCelcius(), name, cLabel) + "\n";
+    String metrics = ToProm(name, GetHtu31dTempFahrenheit(), METRIC_TEMP, UNIT_FAHRENHEIT);
+    metrics += "\n" + ToProm(name, GetHtu31dTempCelcius(), METRIC_TEMP, UNIT_CELSIUS) + "\n";
     return metrics;
 }
 
-String RoomWeather::GetVOCMetrics() {
-    String name = "rw_airQuality";
-    String vocLabel = GetLocationLabel() + ", " + "unit=\"ppb\""; 
-    String co2Label = GetLocationLabel() + ", " + "unit=\"ppm\"";
+String RoomWeather::GetSGP30Metrics() {
+    String name = "rw_sgp30";
 
-    String metrics = ToProm(GetSGP30VOC(), name, vocLabel);
-    metrics += "\n" + ToProm(GetSGP30eCO2(), name, co2Label) + "\n";
+    String metrics = ToProm(name, GetSGP30VOC(), METRIC_VOC, UNIT_PPB);
+    metrics += "\n" + ToProm(name, GetSGP30eCO2(), METRIC_CO2, UNIT_PPM) + "\n";
     return metrics;
 }
 
@@ -172,6 +177,7 @@ String RoomWeather::GetLocationLabel() {
     return "location=\"" + _location + "\"";
 }
 
-String RoomWeather::ToProm(String value, String name, String label) {
-    return name + "{" + label + "}" + " " + value;
+String RoomWeather::ToProm(String name, String value, String metric, String unit) {
+    String label = GetLocationLabel() + ", " + metric + ", " + unit;
+    return name + "{" + label + "} " + value;
 }
