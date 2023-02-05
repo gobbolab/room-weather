@@ -38,11 +38,11 @@ String RoomWeather::GetHtu31dHumidity() {
 }
 
 String RoomWeather::GetSGP30eCO2() {
-    return _sgp30->GetCO2stringPPM();
+    return _sgp30->GetCO2StringPPM();
 }
 
 String RoomWeather::GetSGP30VOC() {
-    return _sgp30->GetVOCstringPPB();
+    return _sgp30->GetVOCStringPPB();
 }
 
 void RoomWeather::Connect(char ssid[], char password[]) {
@@ -139,7 +139,7 @@ String RoomWeather::BuildMetrics() {
     String metrics = "";
 
     metrics += GetTemperatureMetrics();
-    metrics += GetQualityMetrics();
+    metrics += GetVOCMetrics();
 
     return metrics;
 }
