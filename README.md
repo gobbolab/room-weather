@@ -47,10 +47,10 @@ rw->Detect();
 ```
 
 ## Reading Sensor Values
-Calling `Scan` will trigger Room Weather to read the values of all detected sensors.
+Calling `Read` will trigger Room Weather to read the values of all detected sensors.
 
 ```
-rw->Scan();
+rw->Read();
 ```
 
 ## Prometheus Export
@@ -66,11 +66,11 @@ void setup() {
 }
 
 void loop() {
-  rw->Scan();
+  rw->Read();
 
-  // Serve will handle any incoming http request and respond with available sensor 
+  // ServeMetrics will handle any incoming http request and respond with available sensor 
   // data in prometheus metric format
-  rw->Serve();
+  rw->ServeMetrics();
 }
 ```
 
