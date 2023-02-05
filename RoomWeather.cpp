@@ -17,10 +17,12 @@ RoomWeather::RoomWeather(String location, char ssid[], char password[], String i
 
 void RoomWeather::Detect() {
     _htu31d = new RW_HTU31D();
+    _sgp30 = new RW_SGP30();
 }
 
 void RoomWeather::Scan() {
     _htu31d->Read();
+    _sgp30->Read();;
 }
 
 String RoomWeather::GetHtu31dTempCelcius() {
@@ -33,6 +35,14 @@ String RoomWeather::GetHtu31dTempFahrenheit() {
 
 String RoomWeather::GetHtu31dHumidity() {
     return _htu31d->GetHumidityString();
+}
+
+String RoomWeather::GetSGP30eCO2() {
+    return _sgp30->GetCO2StringPPM();
+}
+
+String RoomWeather::GetSGP30VOC() {
+    return _sgp30->GetVOCStringPPB();
 }
 
 void RoomWeather::Connect(char ssid[], char password[]) {
@@ -129,6 +139,7 @@ String RoomWeather::BuildMetrics() {
     String metrics = "";
 
     metrics += GetTemperatureMetrics();
+    metrics += GetVOCMetrics();
 
     return metrics;
 }
@@ -140,6 +151,16 @@ String RoomWeather::GetTemperatureMetrics() {
 
     String metrics = ToProm(GetHtu31dTempFahrenheit(), name, fLabel);
     metrics += "\n" + ToProm(GetHtu31dTempCelcius(), name, cLabel) + "\n";
+    return metrics;
+}
+
+String RoomWeather::GetVOCMetrics() {
+    String name = "rw_airQuality";
+    String vocLabel = GetLocationLabel() + ", " + "unit=\"ppb\""; 
+    String co2Label = GetLocationLabel() + ", " + "unit=\"ppm\"";
+
+    String metrics = ToProm(GetSGP30VOC(), name, vocLabel);
+    metrics += "\n" + ToProm(GetSGP30eCO2(), name, co2Label) + "\n";
     return metrics;
 }
 
