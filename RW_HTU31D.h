@@ -9,8 +9,8 @@ class RW_HTU31D : public Sensor
 {
   public:
     RW_HTU31D();
-    void Read(SensorValues * values);
-    String GetPrometheusMetrics(String location, SensorValues * values);
+    void Read(RW_Values * values);
+    String GetPrometheusMetrics(String location, RW_Values * values);
   private:
     Adafruit_HTU31D _htu;
 };

@@ -2,7 +2,7 @@
 #define RWHelper_h
 
 #include "Arduino.h"
-#include "SensorValues.h"
+#include "RW_Values.h"
 
 #define METRIC_TEMP "metric=\"temperature\""
 #define METRIC_HUMIDITY "metric=\"humidity\""

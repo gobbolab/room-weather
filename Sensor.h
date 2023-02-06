@@ -2,15 +2,15 @@
 #define Sensor_h
 
 #include "Arduino.h"
-#include "SensorValues.h"
+#include "RW_Values.h"
 #include "RW_Helper.h"
 
 class Sensor
 {
   public:
     Sensor(int address);
-    virtual void Read(SensorValues * values);
-    virtual String GetPrometheusMetrics(String location, SensorValues * values);
+    virtual void Read(RW_Values * values);
+    virtual String GetPrometheusMetrics(String location, RW_Values * values);
     bool Found();
   protected:
     bool _sensorFound;

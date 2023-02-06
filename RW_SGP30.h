@@ -9,8 +9,8 @@ class RW_SGP30 : public Sensor
 {
   public:
     RW_SGP30();
-    void Read(SensorValues * values);
-    String GetPrometheusMetrics(String location, SensorValues * values);
+    void Read(RW_Values * values);
+    String GetPrometheusMetrics(String location, RW_Values * values);
   private:
     Adafruit_SGP30 sgp;
 };

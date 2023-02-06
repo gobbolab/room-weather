@@ -1,5 +1,5 @@
-#ifndef SensorValues_h
-#define SensorValues_h
+#ifndef RW_Values_h
+#define RW_Values_h
 
 class Htu31dValues {
     public:
@@ -14,7 +14,7 @@ class Sgp30Values {
         float VOC;
 };
 
-class SensorValues {
+class RW_Values {
     public:
         Htu31dValues Htu31d;
         Sgp30Values Sgp30;

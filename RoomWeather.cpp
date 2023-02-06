@@ -1,25 +1,15 @@
 #include "RoomWeather.h"
 #include "Arduino.h"
 
-#define METRIC_TEMP "metric=\"temperature\""
-#define METRIC_HUMIDITY "metric=\"humidity\""
-#define METRIC_VOC "metric=\"voc\""
-#define METRIC_CO2 "metric=\"co2\""
-#define UNIT_FAHRENHEIT "unit=\"fahrenheit\""
-#define UNIT_CELSIUS "unit=\"celsius\""
-#define UNIT_PERCENT "unit=\"percent\""
-#define UNIT_PPM "unit=\"ppm\""
-#define UNIT_PPB "unit=\"ppb\""
-
 RoomWeather::RoomWeather(String location) {
     _location = location;
-    Values = new SensorValues();
+    Values = new RW_Values();
 }
 
 RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
     _location = location;
     _wifi = new RoomWeatherWifi(ssid, password);
-    Values = new SensorValues();
+    Values = new RW_Values();
 }
 
 void RoomWeather::Detect() {

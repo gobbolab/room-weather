@@ -14,7 +14,7 @@ RW_SGP30::RW_SGP30()
     }
 }
 
-void RW_SGP30::Read(SensorValues * values){
+void RW_SGP30::Read(RW_Values * values){
     if(! sgp.IAQmeasure()){
         Serial.println("SGP30 measurement failed");
         return;
@@ -24,7 +24,7 @@ void RW_SGP30::Read(SensorValues * values){
     values->Sgp30.VOC = sgp.TVOC;
 }
 
-String RW_SGP30::GetPrometheusMetrics(String location, SensorValues * values) {
+String RW_SGP30::GetPrometheusMetrics(String location, RW_Values * values) {
     String name = "rw_sgp30";
 
     String metrics = RW_Helper::ToPrometheusMetric(name, values->Sgp30.VOC, location, METRIC_VOC, UNIT_PPB);

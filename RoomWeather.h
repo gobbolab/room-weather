@@ -7,12 +7,12 @@
 #include "RoomWeatherWifi.h"
 #include "RW_HTU31D.h"
 #include "RW_SGP30.h"
-#include "SensorValues.h"
+#include "RW_Values.h"
 
 class RoomWeather
 {
   public:
-    SensorValues* Values;
+    RW_Values* Values;
     RoomWeather(String location);
     RoomWeather(String location, char ssid[], char password[]);
     void Detect();
