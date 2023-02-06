@@ -13,76 +13,45 @@
 
 RoomWeather::RoomWeather(String location) {
     _location = location;
+    Values = new SensorValues();
 }
 
 RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
     _location = location;
     _wifi = new RoomWeatherWifi(ssid, password);
+    Values = new SensorValues();
 }
 
 void RoomWeather::Detect() {
     _htu31d = new RW_HTU31D();
     _sgp30 = new RW_SGP30();
+
+    _sensors[0] = _htu31d;
+    _sensors[1] = _sgp30;
 }
 
 void RoomWeather::Read() {
-    _htu31d->Read();
-    _sgp30->Read();;
-}
+    for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
+        if(!_sensors[i]->Found()) {
+            continue;
+        }
 
-String RoomWeather::GetHtu31dTempCelsius() {
-    return _htu31d->GetTempStringCelsius();
-}
-
-String RoomWeather::GetHtu31dTempFahrenheit() {
-    return _htu31d->GetTempStringFahrenheit();
-}
-
-String RoomWeather::GetHtu31dHumidity() {
-    return _htu31d->GetHumidityString();
-}
-
-String RoomWeather::GetSGP30eCO2() {
-    return _sgp30->GetCO2StringPPM();
-}
-
-String RoomWeather::GetSGP30VOC() {
-    return _sgp30->GetVOCStringPPB();
+        _sensors[i]->Read(Values);
+    }
 }
 
 String RoomWeather::BuildMetrics() {
     String metrics = "";
 
-    metrics += GetHTU31DMetrics();
-    metrics += GetSGP30Metrics();
+    for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
+        if(!_sensors[i]->Found()) {
+            continue;
+        }
+
+        metrics += _sensors[i]->GetPrometheusMetrics(_location, Values);
+    }
 
     return metrics;
-}
-
-String RoomWeather::GetHTU31DMetrics() {
-    String name = "rw_htu31d";
-
-    String metrics = ToProm(name, GetHtu31dTempFahrenheit(), METRIC_TEMP, UNIT_FAHRENHEIT);
-    metrics += "\n" + ToProm(name, GetHtu31dTempCelsius(), METRIC_TEMP, UNIT_CELSIUS) + "\n"
-    + ToProm(name, GetHtu31dHumidity(), METRIC_HUMIDITY, UNIT_PERCENT) + "\n";
-    return metrics;
-}
-
-String RoomWeather::GetSGP30Metrics() {
-    String name = "rw_sgp30";
-
-    String metrics = ToProm(name, GetSGP30VOC(), METRIC_VOC, UNIT_PPB);
-    metrics += "\n" + ToProm(name, GetSGP30eCO2(), METRIC_CO2, UNIT_PPM) + "\n";
-    return metrics;
-}
-
-String RoomWeather::GetLocationLabel() {
-    return "location=\"" + _location + "\"";
-}
-
-String RoomWeather::ToProm(String name, String value, String metric, String unit) {
-    String label = GetLocationLabel() + ", " + metric + ", " + unit;
-    return name + "{" + label + "} " + value;
 }
 
 void RoomWeather::ServeMetrics() {

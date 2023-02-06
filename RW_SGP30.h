@@ -9,12 +9,9 @@ class RW_SGP30 : public Sensor
 {
   public:
     RW_SGP30();
-    void Read();
-    String GetVOCStringPPB();//exposed functions
-    String GetCO2StringPPM();
+    void Read(SensorValues * values);
+    String GetPrometheusMetrics(String location, SensorValues * values);
   private:
     Adafruit_SGP30 sgp;
-    float _tvoc;  //private returns from the adafruit library
-    float _eco2;
 };
 #endif
