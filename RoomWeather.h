@@ -20,8 +20,6 @@ class RoomWeather
     void ServeMetrics();
   private:
     RoomWeatherWifi *_wifi;
-    RW_HTU31D * _htu31d;
-    RW_SGP30 * _sgp30;
     Sensor* _sensors[SUPPORTED_SENSOR_COUNT];
     String _location;
     String BuildMetrics();

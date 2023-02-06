@@ -23,11 +23,8 @@ RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
 }
 
 void RoomWeather::Detect() {
-    _htu31d = new RW_HTU31D();
-    _sgp30 = new RW_SGP30();
-
-    _sensors[0] = _htu31d;
-    _sensors[1] = _sgp30;
+    _sensors[0] = new RW_HTU31D();
+    _sensors[1] = new RW_SGP30();
 }
 
 void RoomWeather::Read() {
