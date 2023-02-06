@@ -36,7 +36,6 @@ RoomWeather *rw = new RoomWeather("office", ssid, password);
 Calling `Detect` will trigger Room Weather to automatically detect any supported sensors connected on I2C.
 
 ```
-RoomWeather *rw = new RoomWeather("office", "wifi_ssid", "wifipassword");
 rw->Detect();
 ```
 
@@ -50,7 +49,7 @@ rw->Read();
 ## Accessing Values
 Collected sensor values are available via the `Values` object.
 ```
-values->Htu31d.Humidity
+rw->Values.Htu31d.Humidity
 ```
 
 More information about utilizing and accessing sensor values can be found below.
