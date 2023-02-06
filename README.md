@@ -7,8 +7,8 @@ Supported sensors simply need to be plugged into the I2C bus of the Arduino to a
 The hope is to provide a simple system for monitoring air quality in houses, workshops 3d printer enclosures etc. using off the shelf components and simple connectors.
 
 # Supported Sensors
-[HTU31D Temp & Humidity](https://www.adafruit.com/product/4832)
-[SGP30 VOC & C02](https://www.adafruit.com/product/3709)
+- [HTU31D Temp & Humidity](https://www.adafruit.com/product/4832)
+- [SGP30 VOC & C02](https://www.adafruit.com/product/3709)
 
 
 # Usage
