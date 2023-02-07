@@ -1,10 +1,10 @@
-#include "RoomWeatherWifi.h"
+#include "RW_Wifi.h"
 
-RoomWeatherWifi::RoomWeatherWifi(char ssid[], char password[]) {
+RW_Wifi::RW_Wifi(char ssid[], char password[]) {
     StartWiFi(ssid, password);
 }
 
-void RoomWeatherWifi::StartWiFi(char ssid[], char password[]) {
+void RW_Wifi::StartWiFi(char ssid[], char password[]) {
     Serial.print("Attempting to connect to wifi..");
 
     WiFi.begin(ssid, password);
@@ -21,7 +21,7 @@ void RoomWeatherWifi::StartWiFi(char ssid[], char password[]) {
     PrintWifiStatus();
 }
 
-void RoomWeatherWifi::Serve(String metrics) {
+void RW_Wifi::Serve(String metrics) {
     WiFiClient client = _server->available();
 
   if (client) {
@@ -60,7 +60,7 @@ void RoomWeatherWifi::Serve(String metrics) {
   }
 }
 
-void RoomWeatherWifi::PrintWifiStatus() {
+void RW_Wifi::PrintWifiStatus() {
   Serial.println("===== WiFi Status =====");
 
   Serial.print("SSID: ");

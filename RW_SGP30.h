@@ -1,11 +1,11 @@
 #ifndef RW_SGP30_h
 #define RW_SGP30_h
 
-#include "Sensor.h"
+#include "RW_Sensor.h"
 #include <Wire.h>
 #include "Adafruit_SGP30.h"
 
-class RW_SGP30 : public Sensor
+class RW_SGP30 : public RW_Sensor
 {
   public:
     RW_SGP30();

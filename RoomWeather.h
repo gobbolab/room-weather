@@ -4,7 +4,7 @@
 #define SUPPORTED_SENSOR_COUNT 2
 
 #include <WiFi.h>
-#include "RoomWeatherWifi.h"
+#include "RW_Wifi.h"
 #include "RW_HTU31D.h"
 #include "RW_SGP30.h"
 #include "RW_Values.h"
@@ -19,8 +19,8 @@ class RoomWeather
     void Read();
     void ServeMetrics();
   private:
-    RoomWeatherWifi *_wifi;
-    Sensor* _sensors[SUPPORTED_SENSOR_COUNT];
+    RW_Wifi *_wifi;
+    RW_Sensor* _sensors[SUPPORTED_SENSOR_COUNT];
     String _location;
     String BuildMetrics();
 };

@@ -8,7 +8,7 @@ RoomWeather::RoomWeather(String location) {
 
 RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
     _location = location;
-    _wifi = new RoomWeatherWifi(ssid, password);
+    _wifi = new RW_Wifi(ssid, password);
     Values = new RW_Values();
 }
 

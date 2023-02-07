@@ -1,7 +1,7 @@
 #include "RW_SGP30.h"
 
 RW_SGP30::RW_SGP30()
-    : Sensor(0) 
+    : RW_Sensor(0) 
 {
     sgp = Adafruit_SGP30();
 

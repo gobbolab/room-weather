@@ -1,12 +1,12 @@
-#ifndef RoomWeatherWifi_h
-#define RoomWeatherWifi_h
+#ifndef RW_Wifi_h
+#define RW_Wifi_h
 
 #include <WiFi.h>
 
-class RoomWeatherWifi
+class RW_Wifi
 {
   public:
-    RoomWeatherWifi(char ssid[], char password[]);
+    RW_Wifi(char ssid[], char password[]);
     void Serve(String metrics);
   private:
     WiFiServer *_server;
