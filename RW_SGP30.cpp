@@ -14,29 +14,20 @@ RW_SGP30::RW_SGP30()
     }
 }
 
-void RW_SGP30::Read(){
-    if(! sgp.IAQmeasure()){//IAQmeasure takes no parameters and how do I return the values to the variables using it?
+void RW_SGP30::Read(RW_Values * values){
+    if(! sgp.IAQmeasure()){
         Serial.println("SGP30 measurement failed");
         return;
     } 
 
-    _tvoc = sgp.TVOC;
-    _eco2 = sgp.eCO2;
-
+    values->Sgp30.CO2 = sgp.eCO2;
+    values->Sgp30.VOC = sgp.TVOC;
 }
 
-String RW_SGP30::GetVOCStringPPB() {
-    if(!_sensorFound) {
-        return "unavailable";
-    }
+String RW_SGP30::GetPrometheusMetrics(String location, RW_Values * values) {
+    String name = "rw_sgp30";
 
-    return String(_tvoc);
-}
-
-String RW_SGP30::GetCO2StringPPM() {
-    if(!_sensorFound) {
-        return "unavailable";
-    }
-
-    return String(_eco2);
+    String metrics = RW_Helper::ToPrometheusMetric(name, values->Sgp30.VOC, location, METRIC_VOC, UNIT_PPB);
+    metrics += "\n" + RW_Helper::ToPrometheusMetric(name, values->Sgp30.CO2, location, METRIC_CO2, UNIT_PPM) + "\n";
+    return metrics;
 }

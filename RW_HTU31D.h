@@ -9,13 +9,9 @@ class RW_HTU31D : public Sensor
 {
   public:
     RW_HTU31D();
-    void Read();
-    String GetTempStringCelsius();
-    String GetTempStringFahrenheit();
-    String GetHumidityString();
+    void Read(RW_Values * values);
+    String GetPrometheusMetrics(String location, RW_Values * values);
   private:
-    Adafruit_HTU31D htu;
-    float _temp;
-    float _humidity;
+    Adafruit_HTU31D _htu;
 };
 #endif
