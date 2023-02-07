@@ -1,7 +1,7 @@
 #include "RW_HTU31D.h"
 
 RW_HTU31D::RW_HTU31D()
-    : RW_Sensor(0) 
+    : RW_Sensor() 
 {
     _htu = Adafruit_HTU31D();
 

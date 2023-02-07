@@ -8,13 +8,11 @@
 class RW_Sensor
 {
   public:
-    RW_Sensor(int address);
+    RW_Sensor();
     virtual void Read(RW_Values * values);
     virtual String GetPrometheusMetrics(String location, RW_Values * values);
     bool Found();
   protected:
     bool _sensorFound;
-  private:
-    int _address;
 };
 #endif
