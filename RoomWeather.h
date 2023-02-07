@@ -3,7 +3,6 @@
 
 #define SUPPORTED_SENSOR_COUNT 2
 
-#include <WiFi.h>
 #include "RW_Wifi.h"
 #include "RW_HTU31D.h"
 #include "RW_SGP30.h"
