@@ -6,6 +6,7 @@ class Htu31dValues {
         float TemperatureCelsius;
         float TemperatureFahrenheit;
         float Humidity;
+        float AbsoluteHumidity;
 };
 
 class Sgp30Values {

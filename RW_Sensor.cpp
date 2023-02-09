@@ -8,7 +8,6 @@ bool RW_Sensor::Found() {
 }
 
 void RW_Sensor::Read(RW_Values * values) {
-
 }
 
 String RW_Sensor::GetPrometheusMetrics(String location, RW_Values * values) {
