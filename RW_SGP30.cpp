@@ -1,4 +1,5 @@
 #include "RW_SGP30.h"
+#include "RW_Helper.h"
 
 RW_SGP30::RW_SGP30()
     : RW_Sensor() 
@@ -12,9 +13,15 @@ RW_SGP30::RW_SGP30()
         _sensorFound = true;
         Serial.println("SGP30 sensor found!");
     }
+
+    RW_Helper::Sgp30Found = _sensorFound;
 }
 
 void RW_SGP30::Read(RW_Values * values){
+    if (RW_Helper::Htu31dFound) { 
+        sgp.setHumidity(values->Htu31d.AbsoluteHumidity);
+    }
+
     if(! sgp.IAQmeasure()){
         Serial.println("SGP30 measurement failed");
         return;
