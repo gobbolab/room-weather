@@ -20,6 +20,6 @@ void setup() {
 }
 
 void loop() {
-  rw->Read();
+  rw->Read(1000);
   rw->ServeMetrics();
 }

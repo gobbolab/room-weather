@@ -15,19 +15,20 @@ RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
 void RoomWeather::Detect() {
     Serial.println("Detecting sensors.");
     delay(500);
-    
+
     for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
         DetectSensor(_sensors[i]);
     }
 }
 
 void RoomWeather::Read() {
-    for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
-        if(!_sensors[i]->Found()) {
-            continue;
-        }
+    DoRead();
+}
 
-        _sensors[i]->Read(Values);
+void RoomWeather::Read(int interval) {
+    if(RW_Helper::HasTimeElapsed(_lastReadTime, 1000)) {
+        DoRead();
+        _lastReadTime = millis();
     }
 }
 
@@ -51,6 +52,8 @@ void RoomWeather::Load() {
     _sensors[0] = new RW_HTU31D();
     _sensors[1] = new RW_SGP30();
     _sensors[2] = new RW_PM25AQI();
+
+    _lastReadTime = 0;
 }
 
 void RoomWeather::DetectSensor(RW_Sensor * sensor) {
@@ -68,6 +71,20 @@ void RoomWeather::DetectSensor(RW_Sensor * sensor) {
     }
 
     Serial.println(" not detected!");
+}
+
+void RoomWeather::DoRead() {
+    Serial.print("Reading sensors... ");
+
+    for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
+        if(!_sensors[i]->Found()) {
+            continue;
+        }
+
+        _sensors[i]->Read(Values);
+    }
+
+    Serial.println("done!");
 }
 
 void RoomWeather::ServeMetrics() {

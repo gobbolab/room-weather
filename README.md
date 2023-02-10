@@ -40,11 +40,19 @@ rw->Detect();
 ```
 
 ## Reading Sensor Values
-Calling `Read` will trigger Room Weather to read the values of all detected sensors.
+Calling `Read` will trigger Room Weather to read the values of all detected sensors immediately.
 
 ```
 rw->Read();
 ```
+
+Alternatively, you can pass an interval in milliseconds to `Read` which will cause the sensors to be read to only if the time since the last read is greater than the given interval.
+
+```
+rw->Read(1000);
+```
+
+This means you can call `Read` in your main loop in a non blocking fashion knowing that sensors values are updated at the interval you specify, without bombarding the sensors with reads during every iteration of the loop.
 
 ## Accessing Values
 Collected sensor values are available via the `Values` object.
@@ -96,9 +104,11 @@ rw->Values.Sgp30.CO2 = sgp.eCO2;
 rw->values.Sgp30.VOC = sgp.TVOC;
 ```
 
+If HTU31D has been detected, it's absolute humidity value will be automatically provided to SGP30 for more accurate readings.
+
 # Configuring Sample Sketch
 
-To run the included `sensor.ino` sketch, you must create a file called `RoomWeatherConfig.h` in your include path.
+To run the included `prometheus.ino` sketch, you must create a file called `RoomWeatherConfig.h` in your include path.
 
 The file should define the following:
 

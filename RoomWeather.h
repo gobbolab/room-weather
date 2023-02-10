@@ -17,13 +17,16 @@ class RoomWeather
     RoomWeather(String location, char ssid[], char password[]);
     void Detect();
     void Read();
+    void Read(int interval);
     void ServeMetrics();
   private:
     RW_Wifi *_wifi;
     RW_Sensor* _sensors[SUPPORTED_SENSOR_COUNT];
     String _location;
+    unsigned long _lastReadTime;
     void Load();
     void DetectSensor(RW_Sensor * sensor);
+    void DoRead();
     String BuildMetrics();
 };
 

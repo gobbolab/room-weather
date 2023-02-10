@@ -37,5 +37,6 @@ class RW_Helper
     static String ToPrometheusMetric(String name, float value, String location, String metric, String unit);
     static float CelsiusToFahrenheit(float temperature);
     static float CalculateAbsoluteHumidity(float relative_humidity, float temperature);
+    static bool HasTimeElapsed(unsigned long timeStamp, int period);
 };
 #endif
