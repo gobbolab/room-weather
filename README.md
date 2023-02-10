@@ -108,7 +108,7 @@ rw->values.Sgp30.VOC;
 
 ### Features
 
-If HTU31D has been detected, it's absolute humidity value will be automatically provided to SGP30 for more accurate readings.
+* If HTU31D has been detected, it's absolute humidity value will be automatically provided to SGP30 for more accurate readings.
 
 ## PMSA003I Air Quality
 
