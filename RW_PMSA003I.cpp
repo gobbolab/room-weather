@@ -7,10 +7,7 @@ RW_PMSA003I::RW_PMSA003I()
 }
 
 bool RW_PMSA003I::Detect() {
-    if(_pm25.begin_I2C()) {
-        _sensorFound = true;
-    }
-
+    _sensorFound = _pm25.begin_I2C();
     RW_Helper::Pmsa003iFound = _sensorFound;
     return _sensorFound;
 }

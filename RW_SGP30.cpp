@@ -7,10 +7,7 @@ RW_SGP30::RW_SGP30()
 }
 
 bool RW_SGP30::Detect() {
-    if(sgp.begin()) {
-        _sensorFound = true;
-    }
-
+    _sensorFound = sgp.begin();
     RW_Helper::Sgp30Found = _sensorFound;
     return _sensorFound;
 }
