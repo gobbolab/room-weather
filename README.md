@@ -61,7 +61,7 @@ Collected sensor values are available via the `Values` object.
 rw->Values.Htu31d.Humidity
 ```
 
-More information about utilizing and accessing sensor values can be found in the [Sensor Utilization Section](#Sensor Utilization)
+More information about utilizing and accessing sensor values can be found in the [Sensor Utilization Section](https://github.com/gobbolab/room-weather#sensor-utilization)
 
 ## Prometheus Export
 
