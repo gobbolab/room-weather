@@ -14,7 +14,7 @@ The hope is to provide a simple system for monitoring air quality in houses, wor
 
 # Usage
 
-See example `sensor.ino` sketch for a full usage example.
+See [examples folder](https://github.com/gobbolab/room-weather/tree/main/examples) for full usage examples.
 
 ## Creating a Room Weather Instance
 
