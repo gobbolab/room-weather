@@ -7,10 +7,7 @@ RW_HTU31D::RW_HTU31D()
 }
 
 bool RW_HTU31D::Detect() {
-    if(_htu.begin(0x40)) {
-        _sensorFound = true;
-    }
-
+    _sensorFound = _htu.begin(0x40);
     RW_Helper::Htu31dFound = _sensorFound;
     return _sensorFound;
 }
