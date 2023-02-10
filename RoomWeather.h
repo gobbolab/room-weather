@@ -22,6 +22,8 @@ class RoomWeather
     RW_Wifi *_wifi;
     RW_Sensor* _sensors[SUPPORTED_SENSOR_COUNT];
     String _location;
+    void Load();
+    void DetectSensor(RW_Sensor * sensor);
     String BuildMetrics();
 };
 

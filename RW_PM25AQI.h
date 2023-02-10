@@ -8,7 +8,9 @@ class RW_PM25AQI : public RW_Sensor
 {
   public:
     RW_PM25AQI();
+    bool Detect();
     void Read(RW_Values * values);
+    String GetName();
     String GetPrometheusMetrics(String location, RW_Values * values);
   private:
     Adafruit_PM25AQI _pm25;

@@ -4,15 +4,23 @@
 RW_PM25AQI::RW_PM25AQI() {
     _pm25 = Adafruit_PM25AQI();
 
-    if (!_pm25.begin_I2C()) {
-        _sensorFound = false;
-        Serial.println("PM25AQI sensor not found!");
-    } else {
+    // if (!_pm25.begin_I2C()) {
+    //     _sensorFound = false;
+    //     Serial.println("PM25AQI sensor not found!");
+    // } else {
+    //     _sensorFound = true;
+    //     Serial.println("PM25AQI sensor found!");
+    // }
+
+}
+
+bool RW_PM25AQI::Detect() {
+    if(_pm25.begin_I2C()) {
         _sensorFound = true;
-        Serial.println("PM25AQI sensor found!");
     }
 
     RW_Helper::Pm25AqiFound = _sensorFound;
+    return _sensorFound;
 }
 
 void RW_PM25AQI::Read(RW_Values * values) {
@@ -35,6 +43,10 @@ void RW_PM25AQI::Read(RW_Values * values) {
   values->Pm25Aqi.Particles25um = data.particles_25um;
   values->Pm25Aqi.Particles50um = data.particles_50um;
   values->Pm25Aqi.Particles100um = data.particles_100um;
+}
+
+String RW_PM25AQI::GetName() {
+    return "PM25AQI";
 }
 
 String RW_PM25AQI::GetPrometheusMetrics(String location, RW_Values * values) {

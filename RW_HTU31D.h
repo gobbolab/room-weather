@@ -9,7 +9,9 @@ class RW_HTU31D : public RW_Sensor
 {
   public:
     RW_HTU31D();
+    bool Detect();
     void Read(RW_Values * values);
+    String GetName();
     String GetPrometheusMetrics(String location, RW_Values * values);
   private:
     Adafruit_HTU31D _htu;

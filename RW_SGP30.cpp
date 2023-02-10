@@ -6,15 +6,22 @@ RW_SGP30::RW_SGP30()
 {
     sgp = Adafruit_SGP30();
 
-    if (!sgp.begin()) {
-        _sensorFound = false;
-        Serial.println("SGP30 sensor not found!");
-    } else {
+    // if (!sgp.begin()) {
+    //     _sensorFound = false;
+    //     Serial.println("SGP30 sensor not found!");
+    // } else {
+    //     _sensorFound = true;
+    //     Serial.println("SGP30 sensor found!");
+    // }
+}
+
+bool RW_SGP30::Detect() {
+    if(sgp.begin()) {
         _sensorFound = true;
-        Serial.println("SGP30 sensor found!");
     }
 
     RW_Helper::Sgp30Found = _sensorFound;
+    return _sensorFound;
 }
 
 void RW_SGP30::Read(RW_Values * values){
@@ -29,6 +36,10 @@ void RW_SGP30::Read(RW_Values * values){
 
     values->Sgp30.CO2 = sgp.eCO2;
     values->Sgp30.VOC = sgp.TVOC;
+}
+
+String RW_SGP30::GetName() {
+    return "SGP30";
 }
 
 String RW_SGP30::GetPrometheusMetrics(String location, RW_Values * values) {

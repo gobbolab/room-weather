@@ -3,19 +3,22 @@
 
 RoomWeather::RoomWeather(String location) {
     _location = location;
-    Values = new RW_Values();
+    Load();
 }
 
 RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
     _location = location;
     _wifi = new RW_Wifi(ssid, password);
-    Values = new RW_Values();
+    Load();
 }
 
 void RoomWeather::Detect() {
-    _sensors[0] = new RW_HTU31D();
-    _sensors[1] = new RW_SGP30();
-    _sensors[2] = new RW_PM25AQI();
+    Serial.println("Detecting sensors.");
+    delay(500);
+    
+    for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
+        DetectSensor(_sensors[i]);
+    }
 }
 
 void RoomWeather::Read() {
@@ -40,6 +43,31 @@ String RoomWeather::BuildMetrics() {
     }
 
     return metrics;
+}
+
+void RoomWeather::Load() {
+    Values = new RW_Values();
+
+    _sensors[0] = new RW_HTU31D();
+    _sensors[1] = new RW_SGP30();
+    _sensors[2] = new RW_PM25AQI();
+}
+
+void RoomWeather::DetectSensor(RW_Sensor * sensor) {
+    Serial.print("Attempting to detect ");
+    Serial.print(sensor->GetName());
+    Serial.print("...");
+
+    for(int tries = 0; tries < 5; tries++) {
+        Serial.print(".");
+        if(sensor->Detect()) {
+            Serial.println(" detected!");
+            return;
+        }
+        delay(1000);
+    }
+
+    Serial.println(" not detected!");
 }
 
 void RoomWeather::ServeMetrics() {

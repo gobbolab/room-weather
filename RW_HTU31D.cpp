@@ -6,15 +6,22 @@ RW_HTU31D::RW_HTU31D()
 {
     _htu = Adafruit_HTU31D();
 
-    if (!_htu.begin(0x40)) {
-        _sensorFound = false;
-        Serial.println("HTU31D sensor not found!");
-    } else {
+    // if (!_htu.begin(0x40)) {
+    //     _sensorFound = false;
+    //     Serial.println("HTU31D sensor not found!");
+    // } else {
+    //     _sensorFound = true;
+    //     Serial.println("HTU31D sensor found!");
+    // }
+}
+
+bool RW_HTU31D::Detect() {
+    if(_htu.begin(0x40)) {
         _sensorFound = true;
-        Serial.println("HTU31D sensor found!");
     }
 
     RW_Helper::Htu31dFound = _sensorFound;
+    return _sensorFound;
 }
 
 void RW_HTU31D::Read(RW_Values * values) {
@@ -25,6 +32,10 @@ void RW_HTU31D::Read(RW_Values * values) {
     values->Htu31d.TemperatureCelsius = t.temperature;
     values->Htu31d.TemperatureFahrenheit = RW_Helper::CelsiusToFahrenheit(t.temperature);
     values->Htu31d.AbsoluteHumidity = RW_Helper::CalculateAbsoluteHumidity(h.relative_humidity, t.temperature);
+}
+
+String RW_HTU31D::GetName() {
+    return "HTU31D";
 }
 
 String RW_HTU31D::GetPrometheusMetrics(String location, RW_Values * values) {
