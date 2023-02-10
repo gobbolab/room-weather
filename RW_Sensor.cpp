@@ -1,6 +1,7 @@
 #include "RW_Sensor.h"
 
 RW_Sensor::RW_Sensor() {
+    _sensorFound = false;
 }
 
 bool RW_Sensor::Found() {

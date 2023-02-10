@@ -2,17 +2,8 @@
 #include "RW_Helper.h"
 
 RW_HTU31D::RW_HTU31D()
-    : RW_Sensor() 
-{
+    : RW_Sensor() {
     _htu = Adafruit_HTU31D();
-
-    // if (!_htu.begin(0x40)) {
-    //     _sensorFound = false;
-    //     Serial.println("HTU31D sensor not found!");
-    // } else {
-    //     _sensorFound = true;
-    //     Serial.println("HTU31D sensor found!");
-    // }
 }
 
 bool RW_HTU31D::Detect() {

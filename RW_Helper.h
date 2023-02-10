@@ -33,7 +33,7 @@ class RW_Helper
   public:
     static bool Htu31dFound;
     static bool Sgp30Found;
-    static bool Pm25AqiFound;
+    static bool Pmsa003iFound;
     static String ToPrometheusMetric(String name, float value, String location, String metric, String unit);
     static float CelsiusToFahrenheit(float temperature);
     static float CalculateAbsoluteHumidity(float relative_humidity, float temperature);

@@ -9,6 +9,7 @@ The hope is to provide a simple system for monitoring air quality in houses, wor
 # Supported Sensors
 - [HTU31D Temp & Humidity](https://www.adafruit.com/product/4832)
 - [SGP30 VOC & C02](https://www.adafruit.com/product/3709)
+- [PMSA003I Air Quality](https://www.adafruit.com/product/4632)
 
 
 # Usage
@@ -60,7 +61,7 @@ Collected sensor values are available via the `Values` object.
 rw->Values.Htu31d.Humidity
 ```
 
-More information about utilizing and accessing sensor values can be found below.
+More information about utilizing and accessing sensor values can be found in the [Sensor Utilization Section](#Sensor Utilization)
 
 ## Prometheus Export
 
@@ -91,6 +92,7 @@ void loop() {
 
 ```
 rw->Values.Htu31d.Humidity;
+rw->Values.Htu31d.AsboluteHumidity;
 rw->Values.Htu31d.TemperatureCelsius;
 rw->Values.Htu31d.TemperatureFahrenheit;
 ```
@@ -100,11 +102,32 @@ rw->Values.Htu31d.TemperatureFahrenheit;
 ### Values
 
 ```
-rw->Values.Sgp30.CO2 = sgp.eCO2;
-rw->values.Sgp30.VOC = sgp.TVOC;
+rw->Values.Sgp30.CO2;
+rw->values.Sgp30.VOC;
 ```
 
+### Features
+
 If HTU31D has been detected, it's absolute humidity value will be automatically provided to SGP30 for more accurate readings.
+
+## PMSA003I Air Quality
+
+### Values
+
+```
+values->Pmsa003i.Pm10Standard;
+values->Pmsa003i.Pm25Standard;
+values->Pmsa003i.Pm100Standard;
+values->Pmsa003i.Pm10Env;
+values->Pmsa003i.Pm25Env;
+values->Pmsa003i.Pm100Env;
+values->Pmsa003i.Particles03um;
+values->Pmsa003i.Particles05um;
+values->Pmsa003i.Particles10um;
+values->Pmsa003i.Particles25um;
+values->Pmsa003i.Particles50um;
+values->Pmsa003i.Particles100um;
+```
 
 # Configuring Sample Sketch
 

@@ -15,7 +15,7 @@ class Sgp30Values {
         float VOC;
 };
 
-class Pm25AqiValues {
+class Pmsa003iValues {
     public:
         uint16_t Pm10Standard;
         uint16_t Pm25Standard;
@@ -35,7 +35,7 @@ class RW_Values {
     public:
         Htu31dValues Htu31d;
         Sgp30Values Sgp30;
-        Pm25AqiValues Pm25Aqi;
+        Pmsa003iValues Pmsa003i;
 
 };
 

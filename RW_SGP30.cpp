@@ -2,17 +2,8 @@
 #include "RW_Helper.h"
 
 RW_SGP30::RW_SGP30()
-    : RW_Sensor() 
-{
+    : RW_Sensor() {
     sgp = Adafruit_SGP30();
-
-    // if (!sgp.begin()) {
-    //     _sensorFound = false;
-    //     Serial.println("SGP30 sensor not found!");
-    // } else {
-    //     _sensorFound = true;
-    //     Serial.println("SGP30 sensor found!");
-    // }
 }
 
 bool RW_SGP30::Detect() {
