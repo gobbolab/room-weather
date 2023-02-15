@@ -6,6 +6,8 @@ Supported sensors simply need to be plugged into the I2C bus of the Arduino to a
 
 The hope is to provide a simple system for monitoring air quality in houses, workshops 3d printer enclosures etc. using off the shelf components and simple connectors.
 
+This library will work with any Arduino board, but we specifically reccomend the [Adafruit ESP32 Feather V2](https://www.adafruit.com/product/5400) since the integrated ESP32 WiFi enables additional features within this library and the integrated STEMMA QT connector allows for quick solderless connections to sensors.
+
 # Supported Sensors
 - [HTU31D Temp & Humidity](https://www.adafruit.com/product/4832)
 - [SGP30 VOC & C02](https://www.adafruit.com/product/3709)
