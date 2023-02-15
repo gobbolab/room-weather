@@ -11,6 +11,7 @@ class RW_HTU31D : public RW_Sensor
     RW_HTU31D();
     bool Detect();
     void Read(RW_Values * values);
+    void Print(RW_Values * values);
     String GetName();
     String GetPrometheusMetrics(String location, RW_Values * values);
   private:

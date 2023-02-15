@@ -10,6 +10,7 @@ class RW_PMSA003I : public RW_Sensor
     RW_PMSA003I();
     bool Detect();
     void Read(RW_Values * values);
+    void Print(RW_Values * values);
     String GetName();
     String GetPrometheusMetrics(String location, RW_Values * values);
   private:
