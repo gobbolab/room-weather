@@ -63,6 +63,14 @@ rw->Values.Htu31d.Humidity
 
 More information about utilizing and accessing sensor values can be found in the [Sensor Utilization Section](https://github.com/gobbolab/room-weather#sensor-utilization)
 
+## Printing Sensor Values
+Calling `Print` will print detected sensor data to the serial port.
+`Print` assumes that `Serial.begin` has already been called. 
+
+```
+rw->Print();
+```
+
 ## Prometheus Export
 
 Sensor data can automatically be exposed in Prometheus metric format on boards that have WiFi enabled.

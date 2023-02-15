@@ -34,6 +34,23 @@ void RW_PMSA003I::Read(RW_Values * values) {
   values->Pmsa003i.Particles100um = data.particles_100um;
 }
 
+void RW_PMSA003I::Print(RW_Values * values)
+{
+    Serial.println("----- PMSA003I -----");
+    Serial.println("PM10Standard: " + String(values->Pmsa003i.Pm10Standard) + "\n" 
+    + "PM25Standard: " + String(values->Pmsa003i.Pm25Standard) + "\n"
+    + "PM100Standard: " + String(values->Pmsa003i.Pm100Standard) + "\n"
+    + "PM10Env: " + String(values->Pmsa003i.Pm10Env) + "\n"
+    + "PM25Env: " + String(values->Pmsa003i.Pm25Env) + "\n"
+    + "PM100Env: " + String(values->Pmsa003i.Pm100Env) + "\n"
+    + "Particles03um: " + String(values->Pmsa003i.Particles03um) + "\n"
+    + "Particles05um: " + String(values->Pmsa003i.Particles05um) + "\n"
+    + "Particles10um: " + String(values->Pmsa003i.Particles10um) + "\n"
+    + "Particles25um: " + String(values->Pmsa003i.Particles25um) + "\n"
+    + "Particles50um: " + String(values->Pmsa003i.Particles50um) + "\n"
+    + "Particles100um: " + String(values->Pmsa003i.Particles100um) + "\n");
+}
+
 String RW_PMSA003I::GetName() {
     return "PMSA003I";
 }

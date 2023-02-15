@@ -22,6 +22,15 @@ void RW_HTU31D::Read(RW_Values * values) {
     values->Htu31d.AbsoluteHumidity = RW_Helper::CalculateAbsoluteHumidity(h.relative_humidity, t.temperature);
 }
 
+void RW_HTU31D::Print(RW_Values * values)
+{
+    Serial.println("----- HTU31D -----");
+    Serial.println("Humidity: " + String(values->Htu31d.AbsoluteHumidity) + "\n" 
+    + "Temperature (Celsius): " + String(values->Htu31d.TemperatureCelsius) + "\n"
+    + "Temperature (Fahrenheit): " + String(values->Htu31d.TemperatureFahrenheit) + "\n"
+    + "Absolute Humidity: " + String(values->Htu31d.AbsoluteHumidity) + "\n");
+}
+
 String RW_HTU31D::GetName() {
     return "HTU31D";
 }

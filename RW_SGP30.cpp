@@ -26,6 +26,12 @@ void RW_SGP30::Read(RW_Values * values){
     values->Sgp30.VOC = sgp.TVOC;
 }
 
+void RW_SGP30::Print(RW_Values * values)
+{
+    Serial.println("----- SGP30 -----");
+    Serial.println("VOC: " + String(values->Sgp30.VOC) + "\n" + "CO2: " + String(values->Sgp30.CO2) + "\n");
+}
+
 String RW_SGP30::GetName() {
     return "SGP30";
 }

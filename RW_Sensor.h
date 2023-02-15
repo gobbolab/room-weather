@@ -11,6 +11,7 @@ class RW_Sensor
     RW_Sensor();
     virtual bool Detect();
     virtual void Read(RW_Values * values);
+    virtual void Print(RW_Values * values);
     virtual String GetName();
     virtual String GetPrometheusMetrics(String location, RW_Values * values);
     bool Found();

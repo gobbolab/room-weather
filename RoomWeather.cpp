@@ -32,6 +32,16 @@ void RoomWeather::Read(int interval) {
     }
 }
 
+void RoomWeather::Print() {
+    for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
+        if(!_sensors[i]->Found()) {
+            continue;
+        }
+
+        _sensors[i]->Print(Values);
+    }
+}
+
 String RoomWeather::BuildMetrics() {
     String metrics = "";
 
@@ -74,7 +84,7 @@ void RoomWeather::DetectSensor(RW_Sensor * sensor) {
 }
 
 void RoomWeather::DoRead() {
-    Serial.print("Reading sensors... ");
+    //Serial.print("Reading sensors... ");
 
     for(int i = 0; i < SUPPORTED_SENSOR_COUNT; i++) {
         if(!_sensors[i]->Found()) {
@@ -84,7 +94,7 @@ void RoomWeather::DoRead() {
         _sensors[i]->Read(Values);
     }
 
-    Serial.println("done!");
+    //Serial.println("done!");
 }
 
 void RoomWeather::ServeMetrics() {

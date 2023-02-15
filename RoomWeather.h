@@ -18,6 +18,7 @@ class RoomWeather
     void Detect();
     void Read();
     void Read(int interval);
+    void Print();
     void ServeMetrics();
   private:
     RW_Wifi *_wifi;

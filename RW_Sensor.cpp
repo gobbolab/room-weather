@@ -15,6 +15,9 @@ bool RW_Sensor::Detect() {
 void RW_Sensor::Read(RW_Values * values) {
 }
 
+void RW_Sensor::Print(RW_Values * values) {
+}
+
 String RW_Sensor::GetName() {
     return "";
 }
