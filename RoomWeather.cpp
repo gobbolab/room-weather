@@ -26,7 +26,7 @@ void RoomWeather::Read() {
 }
 
 void RoomWeather::Read(int interval) {
-    if(RW_Helper::HasTimeElapsed(_lastReadTime, 1000)) {
+    if(RW_Helper::HasTimeElapsed(_lastReadTime, interval)) {
         DoRead();
         _lastReadTime = millis();
     }
