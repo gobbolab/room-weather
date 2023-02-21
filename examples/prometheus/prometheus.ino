@@ -1,8 +1,7 @@
 #include "RoomWeather.h"
-#include "RoomWeatherConfig.h"
 
-char ssid[] = RW_SECRET_SSID;
-char pass[] = RW_SECRET_PASS;
+char ssid[] = "your_wifi_ssid";
+char pass[] = "your_wifi_password";
 
 RoomWeather *rw;
 
@@ -15,7 +14,7 @@ void setup() {
 
   Serial.println("Serial started.");
 
-  rw = new RoomWeather(RW_LOCATION, ssid, pass);
+  rw = new RoomWeather("location_of_your_sensors", ssid, pass);
   rw->Detect();
 }
 

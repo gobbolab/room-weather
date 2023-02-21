@@ -107,6 +107,11 @@ rw->Values.Htu31d.TemperatureCelsius;
 rw->Values.Htu31d.TemperatureFahrenheit;
 ```
 
+### Features
+
+* Fahrenheit temperature is made available by converting the sensor's celsius reading.
+* Absolute humitidy is made available by a a calculation using the sensor's humidity and temperature readings.
+
 ## SGP30 VOC & C02
 
 ### Values
@@ -137,16 +142,4 @@ values->Pmsa003i.Particles10um;
 values->Pmsa003i.Particles25um;
 values->Pmsa003i.Particles50um;
 values->Pmsa003i.Particles100um;
-```
-
-# Configuring Sample Sketch
-
-To run the included `prometheus.ino` sketch, you must create a file called `RoomWeatherConfig.h` in your include path.
-
-The file should define the following:
-
-```
-#define RW_SECRET_SSID "your_wifi_ssid"
-#define RW_SECRET_PASS "your_wifi_password"
-#define RW_LOCATION "location_or_name_of_room_weather_instance"
 ```
