@@ -42,6 +42,10 @@ void RoomWeather::Print() {
     }
 }
 
+void RoomWeather:: Print(int index) {
+    _sensors[index]->Print(Values);
+}
+
 String RoomWeather::BuildMetrics() {
     String metrics = "";
 
