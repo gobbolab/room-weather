@@ -73,6 +73,17 @@ Calling `Print` will print detected sensor data to the serial port.
 rw->Print();
 ```
 
+Calling `Print` and passing an index will print the values of the specified sensor.
+
+```
+rw->Print(RW_SPG30_INDEX);
+```
+
+### Sensor Index Constants
+- RW_HTU31D_INDEX
+- RW_SPG30_INDEX
+- RW_PMSA003I_INDEX
+
 ## Prometheus Export
 
 Sensor data can automatically be exposed in Prometheus metric format on boards that have WiFi enabled.

@@ -42,6 +42,10 @@ void RoomWeather::Print() {
     }
 }
 
+void RoomWeather::Print(int index) {
+    _sensors[index]->Print(Values);
+}
+
 String RoomWeather::BuildMetrics() {
     String metrics = "";
 
@@ -59,9 +63,9 @@ String RoomWeather::BuildMetrics() {
 void RoomWeather::Load() {
     Values = new RW_Values();
 
-    _sensors[0] = new RW_HTU31D();
-    _sensors[1] = new RW_SGP30();
-    _sensors[2] = new RW_PMSA003I();
+    _sensors[RW_HTU31D_INDEX] = new RW_HTU31D();
+    _sensors[RW_SPG30_INDEX] = new RW_SGP30();
+    _sensors[RW_PMSA003I_INDEX] = new RW_PMSA003I();
 
     _lastReadTime = 0;
 }
