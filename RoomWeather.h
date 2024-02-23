@@ -3,7 +3,7 @@
 
 #define SUPPORTED_SENSOR_COUNT 3
 #define RW_HTU31D_INDEX 0
-#define RW_SPG30_INDEX 1
+#define RW_SGP30_INDEX 1
 #define RW_PMSA003I_INDEX 2
 
 #include "RW_Wifi.h"
