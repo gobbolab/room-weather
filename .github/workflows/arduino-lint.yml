@@ -7,3 +7,4 @@ jobs:
       - uses: arduino/arduino-lint-action@v1
         with:
           compliance: strict
+          library-manager: update
