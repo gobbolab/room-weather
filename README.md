@@ -76,12 +76,12 @@ rw->Print();
 Calling `Print` and passing an index will print the values of the specified sensor.
 
 ```
-rw->Print(RW_SPG30_INDEX);
+rw->Print(RW_SGP30_INDEX);
 ```
 
 ### Sensor Index Constants
 - RW_HTU31D_INDEX
-- RW_SPG30_INDEX
+- RW_SGP30_INDEX
 - RW_PMSA003I_INDEX
 
 ## Prometheus Export
