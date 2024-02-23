@@ -154,3 +154,6 @@ values->Pmsa003i.Particles25um;
 values->Pmsa003i.Particles50um;
 values->Pmsa003i.Particles100um;
 ```
+
+# Arduino Library Registry
+Arduino Library Registry logs for this library can be found [here](https://downloads.arduino.cc/libraries/logs/github.com/gobbolab/room-weather/).
