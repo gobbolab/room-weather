@@ -21,7 +21,7 @@
 #define UNIT_FAHRENHEIT "unit=\"fahrenheit\""
 #define UNIT_CELSIUS "unit=\"celsius\""
 #define UNIT_PERCENT "unit=\"percent\""
-#define UNIT_GRAM_PER_M3 "unit\"gram_per_m3\""
+#define UNIT_GRAM_PER_M3 "unit=\"gram_per_m3\""
 #define UNIT_PPM "unit=\"ppm\""
 #define UNIT_PPB "unit=\"ppb\""
 #define UNIT_STANDARD "unit=\"standard\""
