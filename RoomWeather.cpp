@@ -65,6 +65,7 @@ void RoomWeather::Load() {
 
     _sensors[RW_HTU31D_INDEX] = new RW_HTU31D();
     _sensors[RW_SGP30_INDEX] = new RW_SGP30();
+    _sensors[RW_SGP40_INDEX] = new RW_SGP40();
     _sensors[RW_PMSA003I_INDEX] = new RW_PMSA003I();
 
     _lastReadTime = 0;
