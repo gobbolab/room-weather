@@ -8,9 +8,10 @@ jobs:
         with:
           fqbn: "arduino:avr:uno"
           libraries: |
+            - source-path: ./
             - name: Adafruit SGP30 Sensor
             - name: Adafruit SGP40 Sensor
             - name: Adafruit PM25 AQI Sensor
             - name: Adafruit HTU31D Library
           sketch-paths:
-            "- examples/serial"
+            - examples/serial
