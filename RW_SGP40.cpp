@@ -14,8 +14,8 @@ bool RW_SGP40::Detect() {
 
 void RW_SGP40::Read(RW_Values * values){
     if (RW_Helper::Htu31dFound) { 
-        temperature = values->Htu31d.TemperatureCelsius;
-        humidity = values->Htu31d.Humidity;
+        float temperature = values->Htu31d.TemperatureCelsius;
+        float humidity = values->Htu31d.Humidity;
 
         values->Sgp40.Raw = sgp.measureRaw(temperature, humidity);
         values->Sgp40.VOCIndex = sgp.measureVocIndex(temperature, humidity);
