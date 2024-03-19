@@ -2,6 +2,7 @@
 
 bool RW_Helper::Htu31dFound = false;
 bool RW_Helper::Sgp30Found = false;
+bool RW_Helper::Sgp40Found = false;
 bool RW_Helper::Pmsa003iFound = false;
 
 String RW_Helper::ToPrometheusMetric(String name, float value, String location, String metric, String unit) {

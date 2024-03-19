@@ -8,6 +8,8 @@
 #define METRIC_HUMIDITY "metric=\"humidity\""
 #define METRIC_ABSOLUTE_HUMIDITY "metric=\"absolute_humidity\""
 #define METRIC_VOC "metric=\"voc\""
+#define METRIC_VOC_RAW "metric=\"voc_raw\""
+#define METRIC_VOC_INDEX "metric=\"voc_index\""
 #define METRIC_CO2 "metric=\"co2\""
 #define METRIC_PM10 "metric=\"pm1.0\""
 #define METRIC_PM25 "metric=\"pm2.5\""
@@ -27,12 +29,14 @@
 #define UNIT_STANDARD "unit=\"standard\""
 #define UNIT_ENVIRONMENTAL "unit=\"environmental\""
 #define UNIT_PARTICLES "unit=\"particles\""
+#define UNIT_NONE "unit=\"none\""
 
 class RW_Helper
 {
   public:
     static bool Htu31dFound;
     static bool Sgp30Found;
+    static bool Sgp40Found;
     static bool Pmsa003iFound;
     static String ToPrometheusMetric(String name, float value, String location, String metric, String unit);
     static float CelsiusToFahrenheit(float temperature);

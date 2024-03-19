@@ -1,14 +1,16 @@
 #ifndef RoomWeather_h
 #define RoomWeather_h
 
-#define SUPPORTED_SENSOR_COUNT 3
+#define SUPPORTED_SENSOR_COUNT 4
 #define RW_HTU31D_INDEX 0
 #define RW_SGP30_INDEX 1
-#define RW_PMSA003I_INDEX 2
+#define RW_SGP40_INDEX 2
+#define RW_PMSA003I_INDEX 3
 
 #include "RW_Wifi.h"
 #include "RW_HTU31D.h"
 #include "RW_SGP30.h"
+#include "RW_SGP40.h"
 #include "RW_PMSA003I.h"
 #include "RW_Values.h"
 

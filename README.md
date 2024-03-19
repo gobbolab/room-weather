@@ -11,6 +11,7 @@ This library will work with any Arduino board, but we specifically reccomend the
 # Supported Sensors
 - [HTU31D Temp & Humidity](https://www.adafruit.com/product/4832)
 - [SGP30 VOC & C02](https://www.adafruit.com/product/3709)
+- [SGP40 VOC Index](https://www.adafruit.com/product/4829)
 - [PMSA003I Air Quality](https://www.adafruit.com/product/4632)
 
 
@@ -82,6 +83,7 @@ rw->Print(RW_SGP30_INDEX);
 ### Sensor Index Constants
 - RW_HTU31D_INDEX
 - RW_SGP30_INDEX
+- RW_SGP40_INDEX
 - RW_PMSA003I_INDEX
 
 ## Prometheus Export
@@ -132,9 +134,18 @@ rw->Values.Sgp30.CO2;
 rw->values.Sgp30.VOC;
 ```
 
+## SGP40 VOC Index
+
+### Values
+
+```
+rw->Values.Sgp40.Raw;
+rw->values.Sgp40.VOCIndex;
+```
+
 ### Features
 
-* If HTU31D has been detected, it's absolute humidity value will be automatically provided to SGP30 for more accurate readings.
+* If HTU31D has been detected, it's absolute humidity value will be automatically provided to SGP40 for more accurate readings.
 
 ## PMSA003I Air Quality
 
