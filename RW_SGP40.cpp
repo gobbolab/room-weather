@@ -13,20 +13,17 @@ bool RW_SGP40::Detect() {
 }
 
 void RW_SGP40::Read(RW_Values * values){
-    // if (RW_Helper::Htu31dFound) { 
-    //     sgp.setHumidity(values->Htu31d.AbsoluteHumidity);
-    // }
+    if (RW_Helper::Htu31dFound) { 
+        temperature = values->Htu31d.TemperatureCelsius;
+        humidity = values->Htu31d.Humidity;
 
-    // if(! sgp.IAQmeasure()){
-    //     Serial.println("SGP30 measurement failed");
-    //     return;
-    // } 
-
-    // values->Sgp30.CO2 = sgp.eCO2;
-    // values->Sgp30.VOC = sgp.TVOC;
-
-    values->Sgp40.Raw = sgp.measureRaw();
-    values->Sgp40.VOCIndex = sgp.measureVocIndex();
+        values->Sgp40.Raw = sgp.measureRaw(t, h);
+        values->Sgp40.VOCIndex = sgp.measureVocIndex(t, h);
+    } 
+    else {
+        values->Sgp40.Raw = sgp.measureRaw();
+        values->Sgp40.VOCIndex = sgp.measureVocIndex();
+    }
 }
 
 void RW_SGP40::Print(RW_Values * values)
