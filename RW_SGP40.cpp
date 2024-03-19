@@ -37,7 +37,7 @@ String RW_SGP40::GetName() {
 }
 
 String RW_SGP40::GetPrometheusMetrics(String location, RW_Values * values) {
-    String name = "RW_SGP40";
+    String name = "rw_sgp30";
 
     String metrics = RW_Helper::ToPrometheusMetric(name, values->Sgp40.Raw, location, METRIC_VOC_RAW, UNIT_NONE);
     metrics += "\n" + RW_Helper::ToPrometheusMetric(name, values->Sgp40.VOCIndex, location, METRIC_VOC_INDEX, UNIT_NONE) + "\n";
