@@ -24,12 +24,15 @@ void RW_SGP40::Read(RW_Values * values){
 
     // values->Sgp30.CO2 = sgp.eCO2;
     // values->Sgp30.VOC = sgp.TVOC;
+
+    values->Sgp40.Raw = sgp.measureRaw();
+    values->Sgp40.VOCIndex = sgp.measureVocIndex();
 }
 
 void RW_SGP40::Print(RW_Values * values)
 {
     Serial.println("----- SGP40 -----");
-    // Serial.println("VOC: " + String(values->Sgp30.VOC) + "\n" + "CO2: " + String(values->Sgp30.CO2) + "\n");
+    Serial.println("Raw: " + String(values->Sgp40.Raw) + "\n" + "VOC Index: " + String(values->Sgp40.VOCIndex) + "\n");
 }
 
 String RW_SGP40::GetName() {
@@ -39,8 +42,7 @@ String RW_SGP40::GetName() {
 String RW_SGP40::GetPrometheusMetrics(String location, RW_Values * values) {
     String name = "RW_SGP40";
 
-    // String metrics = RW_Helper::ToPrometheusMetric(name, values->Sgp30.VOC, location, METRIC_VOC, UNIT_PPB);
-    // metrics += "\n" + RW_Helper::ToPrometheusMetric(name, values->Sgp30.CO2, location, METRIC_CO2, UNIT_PPM) + "\n";
-    // return metrics;
-    return "";
+    String metrics = RW_Helper::ToPrometheusMetric(name, values->Sgp40.Raw, location, METRIC_VOC, UNIT_RAW);
+    metrics += "\n" + RW_Helper::ToPrometheusMetric(name, values->Sgp40.VOCIndex, location, METRIC_VOC, UNIT_VOC_INDEX) + "\n";
+    return metrics;
 }

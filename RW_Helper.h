@@ -27,6 +27,8 @@
 #define UNIT_STANDARD "unit=\"standard\""
 #define UNIT_ENVIRONMENTAL "unit=\"environmental\""
 #define UNIT_PARTICLES "unit=\"particles\""
+#define UNIT_RAW "unit=\"raw\""
+#define UNIT_VOC_INDEX"unit=\"vod_index\""
 
 class RW_Helper
 {
