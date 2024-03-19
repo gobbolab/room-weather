@@ -6,11 +6,13 @@ RoomWeather::RoomWeather(String location) {
     Load();
 }
 
+#if defined(ESP32)
 RoomWeather::RoomWeather(String location, char ssid[], char password[]) {
     _location = location;
     _wifi = new RW_Wifi(ssid, password);
     Load();
 }
+#endif
 
 void RoomWeather::Detect() {
     Serial.println("Detecting sensors.");
@@ -98,6 +100,7 @@ void RoomWeather::DoRead() {
     }
 }
 
+#if defined(ESP32)
 void RoomWeather::ServeMetrics() {
     if(!_wifi) {
         Serial.println("Attempted to serve metrics over wifi, but wifi is not connected.");
@@ -106,3 +109,4 @@ void RoomWeather::ServeMetrics() {
 
     _wifi->Serve(BuildMetrics());
 }
+#endif

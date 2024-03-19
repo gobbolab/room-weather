@@ -7,7 +7,9 @@
 #define RW_SGP40_INDEX 2
 #define RW_PMSA003I_INDEX 3
 
-#include "RW_Wifi.h"
+#if defined(ESP32)
+    #include "RW_Wifi.h"
+#endif
 #include "RW_HTU31D.h"
 #include "RW_SGP30.h"
 #include "RW_SGP40.h"
@@ -19,15 +21,21 @@ class RoomWeather
   public:
     RW_Values* Values;
     RoomWeather(String location);
-    RoomWeather(String location, char ssid[], char password[]);
+    #if defined(ESP32)
+      RoomWeather(String location, char ssid[], char password[]);
+    #endif
     void Detect();
     void Read();
     void Read(int interval);
     void Print();
     void Print(int index);
-    void ServeMetrics();
+    #if defined(ESP32)
+      void ServeMetrics();
+    #endif
   private:
-    RW_Wifi *_wifi;
+    #if defined(ESP32)
+      RW_Wifi *_wifi;
+    #endif
     RW_Sensor* _sensors[SUPPORTED_SENSOR_COUNT];
     String _location;
     unsigned long _lastReadTime;
