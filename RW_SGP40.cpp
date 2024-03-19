@@ -17,8 +17,8 @@ void RW_SGP40::Read(RW_Values * values){
         temperature = values->Htu31d.TemperatureCelsius;
         humidity = values->Htu31d.Humidity;
 
-        values->Sgp40.Raw = sgp.measureRaw(t, h);
-        values->Sgp40.VOCIndex = sgp.measureVocIndex(t, h);
+        values->Sgp40.Raw = sgp.measureRaw(temperature, humidity);
+        values->Sgp40.VOCIndex = sgp.measureVocIndex(temperature, humidity);
     } 
     else {
         values->Sgp40.Raw = sgp.measureRaw();
