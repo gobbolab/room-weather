@@ -1,3 +1,4 @@
+#if defined(ESP32)
 #include "RW_Wifi.h"
 
 RW_Wifi::RW_Wifi(char ssid[], char password[]) {
@@ -77,3 +78,4 @@ void RW_Wifi::PrintWifiStatus() {
 
   Serial.println("---------------");
 }
+#endif

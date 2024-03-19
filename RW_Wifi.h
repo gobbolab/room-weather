@@ -1,6 +1,7 @@
 #ifndef RW_Wifi_h
 #define RW_Wifi_h
 
+#if defined(ESP32)
 #include <WiFi.h>
 
 class RW_Wifi
@@ -13,5 +14,6 @@ class RW_Wifi
     void StartWiFi(char ssid[], char password[]);
     void PrintWifiStatus();
 };
+#endif
 
 #endif
