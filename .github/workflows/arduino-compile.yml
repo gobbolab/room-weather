@@ -14,4 +14,4 @@ jobs:
             - name: Adafruit PM25 AQI Sensor
             - name: Adafruit HTU31D Library
           sketch-paths:
-            - examples/serial
+            "- examples/serial"
