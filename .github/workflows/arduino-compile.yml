@@ -1,0 +1,11 @@
+- uses: arduino/compile-sketches@v1
+  with:
+    fqbn: "arduino:avr:uno"
+    libraries: |
+      - name: Adafruit SGP30 Sensor
+      - name: Adafruit SGP40 Sensor
+      - name: Adafruit PM25 AQI Sensor
+      - name: Adafruit HTU31D Library
+    sketch-paths:
+      "- examples/serial"
+      
